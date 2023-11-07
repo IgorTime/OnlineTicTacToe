@@ -4,6 +4,7 @@
         <TargetFramework>net7.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <PostBuildEvent>copy TTC.Shared.dll $(OutDir)..\..\..\..\..\..\TTC.Client\Assets\TTC.Shared\TTC.Shared.dll</PostBuildEvent>
     </PropertyGroup>
 
     <ItemGroup>
