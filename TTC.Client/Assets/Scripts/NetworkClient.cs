@@ -1,9 +1,11 @@
+using System;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
 using LiteNetLib;
 using LiteNetLib.Utils;
 using TTC.Shared;
+using TTC.Shared.Handlers;
+using TTC.Shared.Registries;
 using UnityEngine;
 
 public class NetworkClient : MonoBehaviour, INetEventListener
@@ -11,7 +13,8 @@ public class NetworkClient : MonoBehaviour, INetEventListener
     private NetManager netManager;
     private NetPeer server;
     private NetDataWriter writer;
-    
+    private PacketRegistry packetRegistry;
+    private PacketHandlerRegistry handlerRegistry;
 
     public static NetworkClient Instance { get; private set; }
     public bool IsConnected => server != null;
@@ -77,8 +80,27 @@ public class NetworkClient : MonoBehaviour, INetEventListener
         byte channelNumber,
         DeliveryMethod deliveryMethod)
     {
-        var data = Encoding.UTF8.GetString(reader.RawData).Replace("\0", string.Empty);
-        Debug.Log($"We received a '{data}' message from {peer.EndPoint}");
+        var packetType = (PacketType) reader.GetByte();
+        var packet = ResolvePacket(packetType, reader);
+        var handler = ResolveHandler(packetType);
+        handler.Handle(packet, peer.Id);
+        reader.Recycle();
+    }
+
+    private IPacketHandler ResolveHandler(PacketType packetType)
+    {
+        // TODO refactor this
+        var type = handlerRegistry[packetType];
+        var handler = (IPacketHandler) Activator.CreateInstance(type);
+        return handler;
+    }
+
+    private INetPacket ResolvePacket(PacketType packetType, NetPacketReader reader)
+    {
+        //TODO refactor this
+        var type = packetRegistry[packetType];
+        var packet = (INetPacket) Activator.CreateInstance(type);
+        return packet;
     }
 
     public void OnNetworkReceiveUnconnected(
@@ -98,6 +120,8 @@ public class NetworkClient : MonoBehaviour, INetEventListener
 
     private void Init()
     {
+        packetRegistry = new PacketRegistry();
+        handlerRegistry = new PacketHandlerRegistry();
         writer = new NetDataWriter();
         netManager = new NetManager(this)
         {
