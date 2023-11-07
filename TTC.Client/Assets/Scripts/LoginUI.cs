@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
-using SharedLib.Packets.ClientServer;
 using TMPro;
+using TTC.Shared.Packets.ClientServer;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -34,7 +34,7 @@ public class LoginUI : MonoBehaviour
             await Task.Yield();
         }
         
-        var request = new Net_AuthRequest()
+        var request = new NetAuthRequest()
         {
             Username = usernameInput.text,
             Password = passwordInput.text,
@@ -45,7 +45,7 @@ public class LoginUI : MonoBehaviour
 
     private void Send()
     {
-        var request = new Net_AuthRequest()
+        var request = new NetAuthRequest()
         {
             Username = usernameInput.text,
             Password = passwordInput.text,

@@ -3,7 +3,7 @@ using System.Net.Sockets;
 using System.Text;
 using LiteNetLib;
 using LiteNetLib.Utils;
-using SharedLib;
+using TTC.Shared;
 using UnityEngine;
 
 public class NetworkClient : MonoBehaviour, INetEventListener
