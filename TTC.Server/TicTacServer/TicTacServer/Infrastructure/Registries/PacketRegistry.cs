@@ -1,6 +1,6 @@
 ﻿using TTC.Shared;
 
-namespace Registries;
+namespace TicTacServer.Infrastructure.Registries;
 
 public class PacketRegistry
 {

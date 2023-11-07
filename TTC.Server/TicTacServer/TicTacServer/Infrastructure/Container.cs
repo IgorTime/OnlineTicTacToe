@@ -1,9 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Registries;
 using TicTacServer.Data;
 using TicTacServer.Extensions;
 using TicTacServer.Game;
+using TicTacServer.Infrastructure.Registries;
 
 namespace TicTacServer.Infrastructure;
 

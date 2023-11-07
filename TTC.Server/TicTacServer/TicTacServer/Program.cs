@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using TicTacServer;
 using TicTacServer.Infrastructure;
 
 var serviceProvider = Container.Configure();

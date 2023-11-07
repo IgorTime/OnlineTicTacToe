@@ -1,6 +1,9 @@
 using System.Reflection;
+using TicTacServer.Attributes;
 using TicTacServer.PacketHandlers;
 using TTC.Shared;
+
+namespace TicTacServer.Infrastructure.Registries;
 
 public class PacketHandlerRegistry
 {

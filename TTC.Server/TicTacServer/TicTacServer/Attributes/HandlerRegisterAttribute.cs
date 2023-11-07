@@ -1,6 +1,6 @@
 using TTC.Shared;
 
-namespace TicTacServer.PacketHandlers;
+namespace TicTacServer.Attributes;
 
 [AttributeUsage(AttributeTargets.Class)]
 public class HandlerRegisterAttribute : Attribute
