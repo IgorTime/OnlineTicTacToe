@@ -1,0 +1,24 @@
+{
+  "version": 2,
+  "dgSpecHash": "T7GT2EjCLGcFrpuPfoItauHL7+raMqQGSI8f0v6z6t8kTFM1e4HQ45uzNEPVyLDUNT6Ih0CDQYmVIrgG1mLVbg==",
+  "success": true,
+  "projectFilePath": "D:\\UnityProjects\\TicTacClient\\ServerCode\\TicTacServer\\TicTacServer\\TicTacServer.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\igors_gmtlrgf\\.nuget\\packages\\litenetlib\\1.1.0\\litenetlib.1.1.0.nupkg.sha512",
+    "C:\\Users\\igors_gmtlrgf\\.nuget\\packages\\microsoft.extensions.configuration\\8.0.0-rc.2.23479.6\\microsoft.extensions.configuration.8.0.0-rc.2.23479.6.nupkg.sha512",
+    "C:\\Users\\igors_gmtlrgf\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\8.0.0-rc.2.23479.6\\microsoft.extensions.configuration.abstractions.8.0.0-rc.2.23479.6.nupkg.sha512",
+    "C:\\Users\\igors_gmtlrgf\\.nuget\\packages\\microsoft.extensions.configuration.binder\\8.0.0-rc.2.23479.6\\microsoft.extensions.configuration.binder.8.0.0-rc.2.23479.6.nupkg.sha512",
+    "C:\\Users\\igors_gmtlrgf\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\8.0.0-rc.2.23479.6\\microsoft.extensions.dependencyinjection.8.0.0-rc.2.23479.6.nupkg.sha512",
+    "C:\\Users\\igors_gmtlrgf\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.0-rc.2.23479.6\\microsoft.extensions.dependencyinjection.abstractions.8.0.0-rc.2.23479.6.nupkg.sha512",
+    "C:\\Users\\igors_gmtlrgf\\.nuget\\packages\\microsoft.extensions.logging\\8.0.0-rc.2.23479.6\\microsoft.extensions.logging.8.0.0-rc.2.23479.6.nupkg.sha512",
+    "C:\\Users\\igors_gmtlrgf\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\8.0.0-rc.2.23479.6\\microsoft.extensions.logging.abstractions.8.0.0-rc.2.23479.6.nupkg.sha512",
+    "C:\\Users\\igors_gmtlrgf\\.nuget\\packages\\microsoft.extensions.logging.configuration\\8.0.0-rc.2.23479.6\\microsoft.extensions.logging.configuration.8.0.0-rc.2.23479.6.nupkg.sha512",
+    "C:\\Users\\igors_gmtlrgf\\.nuget\\packages\\microsoft.extensions.logging.console\\8.0.0-rc.2.23479.6\\microsoft.extensions.logging.console.8.0.0-rc.2.23479.6.nupkg.sha512",
+    "C:\\Users\\igors_gmtlrgf\\.nuget\\packages\\microsoft.extensions.options\\8.0.0-rc.2.23479.6\\microsoft.extensions.options.8.0.0-rc.2.23479.6.nupkg.sha512",
+    "C:\\Users\\igors_gmtlrgf\\.nuget\\packages\\microsoft.extensions.options.configurationextensions\\8.0.0-rc.2.23479.6\\microsoft.extensions.options.configurationextensions.8.0.0-rc.2.23479.6.nupkg.sha512",
+    "C:\\Users\\igors_gmtlrgf\\.nuget\\packages\\microsoft.extensions.primitives\\8.0.0-rc.2.23479.6\\microsoft.extensions.primitives.8.0.0-rc.2.23479.6.nupkg.sha512",
+    "C:\\Users\\igors_gmtlrgf\\.nuget\\packages\\system.text.encodings.web\\8.0.0-rc.2.23479.6\\system.text.encodings.web.8.0.0-rc.2.23479.6.nupkg.sha512",
+    "C:\\Users\\igors_gmtlrgf\\.nuget\\packages\\system.text.json\\8.0.0-rc.2.23479.6\\system.text.json.8.0.0-rc.2.23479.6.nupkg.sha512"
+  ],
+  "logs": []
+}

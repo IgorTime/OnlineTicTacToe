@@ -1,0 +1,53 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <OutputType>Exe</OutputType>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="LiteNetLib" Version="1.1.0"/>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0-rc.2.23479.6"/>
+        <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0-rc.2.23479.6"/>
+        <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="8.0.0-rc.2.23479.6"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Content Include="..\..\..\Assets\SharedLib\Packets.meta">
+            <Link>SharedLib\Packets.meta</Link>
+        </Content>
+        <Content Include="..\..\..\Assets\SharedLib\Packets\ClientServer.meta">
+            <Link>SharedLib\Packets\ClientServer.meta</Link>
+        </Content>
+        <Content Include="..\..\..\Assets\SharedLib\Packets\ClientServer\Net_AuthRequest.cs.meta">
+            <Link>SharedLib\Packets\ClientServer\Net_AuthRequest.cs.meta</Link>
+        </Content>
+        <Content Include="..\..\..\Assets\SharedLib\Packets\ServerClient.meta">
+            <Link>SharedLib\Packets\ServerClient.meta</Link>
+        </Content>
+        <Content Include="..\..\..\Assets\SharedLib\PacketType.cs.meta">
+            <Link>SharedLib\PacketType.cs.meta</Link>
+        </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Compile Include="..\..\..\Assets\SharedLib\Packets\ClientServer\Net_AuthRequest.cs">
+            <Link>SharedLib\Packets\ClientServer\Net_AuthRequest.cs</Link>
+        </Compile>
+        <Compile Include="..\..\..\Assets\SharedLib\Packets\ServerClient\Net_OnAuth.cs">
+          <Link>SharedLib\Packets\ServerClient\Net_OnAuth.cs</Link>
+        </Compile>
+        <Compile Include="..\..\..\Assets\SharedLib\Packets\ServerClient\Net_OnAuthFail.cs">
+          <Link>SharedLib\Packets\ServerClient\Net_OnAuthFail.cs</Link>
+        </Compile>
+        <Compile Include="..\..\..\Assets\SharedLib\Packets\ServerClient\Net_OnServerStatus.cs">
+          <Link>SharedLib\Packets\ServerClient\Net_OnServerStatus.cs</Link>
+        </Compile>
+        <Compile Include="..\..\..\Assets\SharedLib\PacketType.cs">
+            <Link>SharedLib\PacketType.cs</Link>
+        </Compile>
+    </ItemGroup>
+
+</Project>
