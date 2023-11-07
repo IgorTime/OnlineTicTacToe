@@ -1,10 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net7.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
+        <TargetFramework>netstandard2.1</TargetFramework>
+        <ImplicitUsings>disable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <PostBuildEvent>copy TTC.Shared.dll $(OutDir)..\..\..\..\..\..\TTC.Client\Assets\TTC.Shared\TTC.Shared.dll</PostBuildEvent>
+        <LangVersion>9</LangVersion>
     </PropertyGroup>
 
     <ItemGroup>

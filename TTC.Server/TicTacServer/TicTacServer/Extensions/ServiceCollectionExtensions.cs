@@ -1,7 +1,8 @@
 ﻿using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
-using TicTacServer.Attributes;
 using TicTacServer.PacketHandlers;
+using TTC.Shared.Attributes;
+using TTC.Shared.Handlers;
 
 namespace TicTacServer.Extensions;
 

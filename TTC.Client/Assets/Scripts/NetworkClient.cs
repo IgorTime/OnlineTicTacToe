@@ -11,6 +11,7 @@ public class NetworkClient : MonoBehaviour, INetEventListener
     private NetManager netManager;
     private NetPeer server;
     private NetDataWriter writer;
+    
 
     public static NetworkClient Instance { get; private set; }
     public bool IsConnected => server != null;

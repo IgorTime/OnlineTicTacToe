@@ -3,7 +3,7 @@ using Microsoft.Extensions.Logging;
 using TicTacServer.Data;
 using TicTacServer.Extensions;
 using TicTacServer.Game;
-using TicTacServer.Infrastructure.Registries;
+using TTC.Shared.Registries;
 
 namespace TicTacServer.Infrastructure;
 
