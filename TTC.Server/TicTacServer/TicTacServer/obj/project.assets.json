@@ -297,6 +297,19 @@
         "build": {
           "buildTransitive/net6.0/System.Text.Json.targets": {}
         }
+      },
+      "TTC.Shared/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "dependencies": {
+          "LiteNetLib": "1.1.0"
+        },
+        "compile": {
+          "bin/placeholder/TTC.Shared.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/TTC.Shared.dll": {}
+        }
       }
     }
   },
@@ -869,6 +882,11 @@
         "system.text.json.nuspec",
         "useSharedDesignerContext.txt"
       ]
+    },
+    "TTC.Shared/1.0.0": {
+      "type": "project",
+      "path": "../../../TTC.Shared/TTC.Shared/TTC.Shared/TTC.Shared.csproj",
+      "msbuildProject": "../../../TTC.Shared/TTC.Shared/TTC.Shared/TTC.Shared.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -876,7 +894,8 @@
       "LiteNetLib >= 1.1.0",
       "Microsoft.Extensions.DependencyInjection >= 8.0.0-rc.2.23479.6",
       "Microsoft.Extensions.Logging >= 8.0.0-rc.2.23479.6",
-      "Microsoft.Extensions.Logging.Console >= 8.0.0-rc.2.23479.6"
+      "Microsoft.Extensions.Logging.Console >= 8.0.0-rc.2.23479.6",
+      "TTC.Shared >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -885,11 +904,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\UnityProjects\\TicTacClient\\ServerCode\\TicTacServer\\TicTacServer\\TicTacServer.csproj",
+      "projectUniqueName": "D:\\UnityProjects\\TicTacToe\\TTC.Server\\TicTacServer\\TicTacServer\\TicTacServer.csproj",
       "projectName": "TicTacServer",
-      "projectPath": "D:\\UnityProjects\\TicTacClient\\ServerCode\\TicTacServer\\TicTacServer\\TicTacServer.csproj",
+      "projectPath": "D:\\UnityProjects\\TicTacToe\\TTC.Server\\TicTacServer\\TicTacServer\\TicTacServer.csproj",
       "packagesPath": "C:\\Users\\igors_gmtlrgf\\.nuget\\packages\\",
-      "outputPath": "D:\\UnityProjects\\TicTacClient\\ServerCode\\TicTacServer\\TicTacServer\\obj\\",
+      "outputPath": "D:\\UnityProjects\\TicTacToe\\TTC.Server\\TicTacServer\\TicTacServer\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\igors_gmtlrgf\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -905,7 +924,11 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "D:\\UnityProjects\\TicTacToe\\TTC.Shared\\TTC.Shared\\TTC.Shared\\TTC.Shared.csproj": {
+              "projectPath": "D:\\UnityProjects\\TicTacToe\\TTC.Shared\\TTC.Shared\\TTC.Shared\\TTC.Shared.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

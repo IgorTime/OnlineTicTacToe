@@ -15,39 +15,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Content Include="..\..\..\Assets\SharedLib\Packets.meta">
-            <Link>SharedLib\Packets.meta</Link>
-        </Content>
-        <Content Include="..\..\..\Assets\SharedLib\Packets\ClientServer.meta">
-            <Link>SharedLib\Packets\ClientServer.meta</Link>
-        </Content>
-        <Content Include="..\..\..\Assets\SharedLib\Packets\ClientServer\Net_AuthRequest.cs.meta">
-            <Link>SharedLib\Packets\ClientServer\Net_AuthRequest.cs.meta</Link>
-        </Content>
-        <Content Include="..\..\..\Assets\SharedLib\Packets\ServerClient.meta">
-            <Link>SharedLib\Packets\ServerClient.meta</Link>
-        </Content>
-        <Content Include="..\..\..\Assets\SharedLib\PacketType.cs.meta">
-            <Link>SharedLib\PacketType.cs.meta</Link>
-        </Content>
-    </ItemGroup>
-
-    <ItemGroup>
-        <Compile Include="..\..\..\Assets\SharedLib\Packets\ClientServer\Net_AuthRequest.cs">
-            <Link>SharedLib\Packets\ClientServer\Net_AuthRequest.cs</Link>
-        </Compile>
-        <Compile Include="..\..\..\Assets\SharedLib\Packets\ServerClient\Net_OnAuth.cs">
-          <Link>SharedLib\Packets\ServerClient\Net_OnAuth.cs</Link>
-        </Compile>
-        <Compile Include="..\..\..\Assets\SharedLib\Packets\ServerClient\Net_OnAuthFail.cs">
-          <Link>SharedLib\Packets\ServerClient\Net_OnAuthFail.cs</Link>
-        </Compile>
-        <Compile Include="..\..\..\Assets\SharedLib\Packets\ServerClient\Net_OnServerStatus.cs">
-          <Link>SharedLib\Packets\ServerClient\Net_OnServerStatus.cs</Link>
-        </Compile>
-        <Compile Include="..\..\..\Assets\SharedLib\PacketType.cs">
-            <Link>SharedLib\PacketType.cs</Link>
-        </Compile>
+      <ProjectReference Include="..\..\..\TTC.Shared\TTC.Shared\TTC.Shared\TTC.Shared.csproj" />
     </ItemGroup>
 
 </Project>

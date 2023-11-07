@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "T7GT2EjCLGcFrpuPfoItauHL7+raMqQGSI8f0v6z6t8kTFM1e4HQ45uzNEPVyLDUNT6Ih0CDQYmVIrgG1mLVbg==",
+  "dgSpecHash": "dKQeB+L7EoZ84QhVtVAT/0nR+R1b+fxYnPL439kG3AOSlAnP+HNDxE1v50VIgX+ccvaOZsczczJ3bU7L908izQ==",
   "success": true,
-  "projectFilePath": "D:\\UnityProjects\\TicTacClient\\ServerCode\\TicTacServer\\TicTacServer\\TicTacServer.csproj",
+  "projectFilePath": "D:\\UnityProjects\\TicTacToe\\TTC.Server\\TicTacServer\\TicTacServer\\TicTacServer.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\igors_gmtlrgf\\.nuget\\packages\\litenetlib\\1.1.0\\litenetlib.1.1.0.nupkg.sha512",
     "C:\\Users\\igors_gmtlrgf\\.nuget\\packages\\microsoft.extensions.configuration\\8.0.0-rc.2.23479.6\\microsoft.extensions.configuration.8.0.0-rc.2.23479.6.nupkg.sha512",

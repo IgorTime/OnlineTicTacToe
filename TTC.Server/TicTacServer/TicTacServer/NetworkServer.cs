@@ -5,9 +5,9 @@ using LiteNetLib.Utils;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Registries;
-using SharedLib;
 using TicTacServer.Game;
 using TicTacServer.PacketHandlers;
+using TTC.Shared;
 
 public class NetworkServer : INetEventListener
 {

@@ -1,4 +1,4 @@
-﻿using SharedLib;
+﻿using TTC.Shared;
 
 namespace Registries;
 

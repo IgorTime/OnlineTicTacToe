@@ -1,7 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
-using SharedLib;
-using SharedLib.Packets.ClientServer;
 using TicTacServer.Game;
+using TTC.Shared;
+using TTC.Shared.Packets.ClientServer;
+using TTC.Shared.Packets.ServerClient;
 
 namespace TicTacServer.PacketHandlers;
 
@@ -21,37 +22,33 @@ public class AuthRequestHandler : IPacketHandler
         this.usersManager = usersManager;
         this.server = server;
     }
-    
+
     public void Handle(INetPacket packet, int connectionId)
     {
-        var message = (Net_AuthRequest) packet;
+        var message = (NetAuthRequest) packet;
         logger.LogInformation($"Received auth request from {message.Username}" +
                               $"with password: {message.Password}");
 
         var loginSuccess = usersManager.LoginOrRegister(
-            connectionId, 
+            connectionId,
             message.Username,
             message.Password);
 
         if (loginSuccess)
         {
-            server.SendClient(connectionId, new Net_OnAuth());
+            server.SendClient(connectionId, new NetOnAuth());
             NotifyOtherPlayers(connectionId);
         }
         else
         {
-            server.SendClient(connectionId, new Net_OnAuthFail());
+            server.SendClient(connectionId, new NetOnAuthFail());
         }
-
     }
 
     private void NotifyOtherPlayers(int excludeConnectionId)
     {
-        var responseMessage = new Net_OnServerStatus()
-        {
+        var responseMessage = new NetOnServerStatus();
 
-        };
-        
         var otherIds = usersManager.GetOtherConnectionIds(excludeConnectionId);
         foreach (var id in otherIds)
         {

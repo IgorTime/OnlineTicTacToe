@@ -11,7 +11,8 @@
           "LiteNetLib": "1.1.0",
           "Microsoft.Extensions.DependencyInjection": "8.0.0-rc.2.23479.6",
           "Microsoft.Extensions.Logging": "8.0.0-rc.2.23479.6",
-          "Microsoft.Extensions.Logging.Console": "8.0.0-rc.2.23479.6"
+          "Microsoft.Extensions.Logging.Console": "8.0.0-rc.2.23479.6",
+          "TTC.Shared": "1.0.0"
         },
         "runtime": {
           "TicTacServer.dll": {}
@@ -197,6 +198,14 @@
             "fileVersion": "8.0.23.47906"
           }
         }
+      },
+      "TTC.Shared/1.0.0": {
+        "dependencies": {
+          "LiteNetLib": "1.1.0"
+        },
+        "runtime": {
+          "TTC.Shared.dll": {}
+        }
       }
     }
   },
@@ -310,6 +319,11 @@
       "sha512": "sha512-SXMjrmm/e0Om+731AEUgm+81dC+i9mV54nKJGOq9+zTYpzujMCmSQSMS1sgQb0gmiiAfTfRC5WgD3l92cfAP+g==",
       "path": "system.text.json/8.0.0-rc.2.23479.6",
       "hashPath": "system.text.json.8.0.0-rc.2.23479.6.nupkg.sha512"
+    },
+    "TTC.Shared/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }
