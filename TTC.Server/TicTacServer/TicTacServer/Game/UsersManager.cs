@@ -5,8 +5,8 @@ namespace TicTacServer.Game;
 
 public class UsersManager
 {
-    private Dictionary<int, ServerConnection> connetions;
     private readonly IUserRepository userRepository;
+    private readonly Dictionary<int, ServerConnection> connetions;
 
     public UsersManager(
         IUserRepository userRepository)
@@ -23,7 +23,7 @@ public class UsersManager
             Peer = peer,
         });
     }
-    
+
     public bool LoginOrRegister(int connectionId, string username, string password)
     {
         var user = userRepository.Get(username);
@@ -43,7 +43,7 @@ public class UsersManager
                 IsOnline = true,
                 Score = 0,
             };
-            
+
             userRepository.Add(user);
         }
 
@@ -52,7 +52,7 @@ public class UsersManager
             user.IsOnline = true;
             connection.User = user;
         }
-        
+
         return true;
     }
 
@@ -64,14 +64,11 @@ public class UsersManager
             var userId = connection.User.Id;
             userRepository.SetOffline(userId);
         }
-        
+
         connetions.Remove(peerId);
     }
 
-    public ServerConnection GetConnection(int peerId)
-    {
-        return connetions[peerId];
-    }
+    public ServerConnection GetConnection(int peerId) => connetions[peerId];
 
     public int[] GetOtherConnectionIds(int excludeConnectionId)
     {

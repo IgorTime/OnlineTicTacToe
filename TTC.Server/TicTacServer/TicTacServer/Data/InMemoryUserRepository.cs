@@ -31,16 +31,13 @@ public class InMemoryUserRepository : IUserRepository
         users[index] = entity;
     }
 
-    public void Add(User entity) => 
-        users.Add(entity);
+    public void Add(User entity) => users.Add(entity);
 
-    public User Get(string id) => 
-        users.FirstOrDefault(x => x.Id == id);
+    public User Get(string id) => users.FirstOrDefault(x => x.Id == id);
 
-    public IQueryable<User> GetQuery() => 
-        users.AsQueryable();
+    public IQueryable<User> GetQuery() => users.AsQueryable();
 
-    public ushort GetTotalCount() => (ushort)users.Count(x => x.IsOnline);
+    public ushort GetTotalCount() => (ushort) users.Count(x => x.IsOnline);
 
     public void Delete(string id)
     {
@@ -48,9 +45,7 @@ public class InMemoryUserRepository : IUserRepository
         users.Remove(user);
     }
 
-    public void SetOnline(string id) => 
-        Get(id).IsOnline = true;
+    public void SetOnline(string id) => Get(id).IsOnline = true;
 
-    public void SetOffline(string id) => 
-        Get(id).IsOnline = false;
+    public void SetOffline(string id) => Get(id).IsOnline = false;
 }

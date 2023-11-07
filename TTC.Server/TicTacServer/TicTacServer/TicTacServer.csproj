@@ -15,7 +15,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\..\TTC.Shared\TTC.Shared\TTC.Shared\TTC.Shared.csproj" />
+        <ProjectReference Include="..\..\..\TTC.Shared\TTC.Shared\TTC.Shared\TTC.Shared.csproj"/>
     </ItemGroup>
 
 </Project>

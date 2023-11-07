@@ -20,7 +20,7 @@ public static class ServiceCollectionExtensions
         {
             serviceCollection.AddScoped(type);
         }
-        
+
         return serviceCollection;
     }
 }
