@@ -4,7 +4,7 @@ using TTC.Shared.Attributes;
 using TTC.Shared.Handlers;
 using TTC.Shared.Packets.ServerClient;
 
-namespace PacketHandlers
+namespace TTT.Client.PacketHandlers
 {
     [HandlerRegister(PacketType.OnAuthFail)]
     public class OnAuthFailHandler : IPacketHandler

@@ -1,10 +1,9 @@
 ﻿using TTC.Shared;
 using TTC.Shared.Attributes;
 using TTC.Shared.Handlers;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace PacketHandlers
+namespace TTT.Client.PacketHandlers
 {
     [HandlerRegister(PacketType.OnAuth)]
     public class OnAuthHandler : IPacketHandler
