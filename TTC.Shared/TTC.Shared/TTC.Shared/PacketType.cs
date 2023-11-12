@@ -6,6 +6,7 @@
 
         Invalid = 0,
         AuthRequest = 1,
+        ServerStatusRequest = 2,
 
         #endregion
 
