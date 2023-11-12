@@ -1,5 +1,6 @@
 ﻿using LiteNetLib;
 using TicTacServer.Data;
+using TTC.Shared.Packets.ServerClient;
 
 namespace TicTacServer.Game;
 
@@ -75,5 +76,18 @@ public class UsersManager
         return connetions.Keys
                          .Where(x => x != excludeConnectionId)
                          .ToArray();
+    }
+
+    public PlayerNetDto[] GetTopPlayers()
+    {
+        return userRepository.GetQuery().OrderByDescending(x => x.Score)
+                             .Take(10)
+                             .Select(x => new PlayerNetDto
+                              {
+                                  Username = x.Id,
+                                  Score = x.Score,
+                                  IsOnline = x.IsOnline,
+                              })
+                             .ToArray();
     }
 }

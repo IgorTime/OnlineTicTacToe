@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using TicTacServer.Data;
 using TicTacServer.Game;
 using TTC.Shared;
 using TTC.Shared.Attributes;
@@ -12,15 +13,18 @@ namespace TicTacServer.PacketHandlers;
 public class AuthRequestHandler : IPacketHandler
 {
     private readonly ILogger<AuthRequestHandler> logger;
+    private readonly IUserRepository userRepository;
     private readonly UsersManager usersManager;
     private readonly NetworkServer server;
 
     public AuthRequestHandler(
         ILogger<AuthRequestHandler> logger,
+        IUserRepository userRepository,
         UsersManager usersManager,
         NetworkServer server)
     {
         this.logger = logger;
+        this.userRepository = userRepository;
         this.usersManager = usersManager;
         this.server = server;
     }
@@ -49,7 +53,11 @@ public class AuthRequestHandler : IPacketHandler
 
     private void NotifyOtherPlayers(int excludeConnectionId)
     {
-        var responseMessage = new NetOnServerStatus();
+        var responseMessage = new NetOnServerStatus()
+        {
+            PlayersCount = userRepository.GetTotalCount(),
+            TopPlayers = usersManager.GetTopPlayers(),
+        };
 
         var otherIds = usersManager.GetOtherConnectionIds(excludeConnectionId);
         foreach (var id in otherIds)

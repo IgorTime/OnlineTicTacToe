@@ -71,21 +71,20 @@ public class NetworkServer : INetEventListener
         byte channelNumber,
         DeliveryMethod deliveryMethod)
     {
-        using (var scope = serviceProvider.CreateScope())
-        {
-            try
-            {
-                var packetType = reader.GetByte();
-                var packet = ResolvePacket((PacketType) packetType, reader);
-                var handler = ResolveHandler((PacketType) packetType);
-                handler.Handle(packet, peer.Id);
+        using var scope = serviceProvider.CreateScope();
+        var packetType = reader.GetByte();
 
-                reader.Recycle();
-            }
-            catch (Exception ex)
-            {
-                logger.LogError(ex, "Error while handling packet of type XX");
-            }
+        try
+        {
+            var packet = ResolvePacket((PacketType) packetType, reader);
+            var handler = ResolveHandler((PacketType) packetType);
+            handler.Handle(packet, peer.Id);
+
+            reader.Recycle();
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, $"Error while handling packet of type {(PacketType)packetType}");
         }
     }
 
