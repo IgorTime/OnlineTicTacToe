@@ -8,7 +8,7 @@ namespace TTT.Client.Lobby
     public class LobbyUI : MonoBehaviour
     {
         [SerializeField]
-        private RectTransform topPlayersContainer;
+        private Transform topPlayersContainer;
         
         [SerializeField]
         private PlayerRow topPlayerPrefab;
@@ -41,7 +41,7 @@ namespace TTT.Client.Lobby
             }
         }
 
-        private void DestroyAllChildren(RectTransform rectTransform)
+        private void DestroyAllChildren(Transform rectTransform)
         {
             while (rectTransform.childCount > 0)
             {

@@ -102,6 +102,7 @@ namespace TTT.Client
             //TODO refactor this
             var type = packetRegistry[packetType];
             var packet = (INetPacket) Activator.CreateInstance(type);
+            packet.Deserialize(reader);
             return packet;
         }
 

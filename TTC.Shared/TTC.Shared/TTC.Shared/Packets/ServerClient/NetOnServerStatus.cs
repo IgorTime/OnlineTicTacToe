@@ -13,7 +13,6 @@ namespace TTC.Shared.Packets.ServerClient
         {
             writer.Put((byte) Type);
             writer.Put(PlayersCount);
-            
             writer.Put((ushort)TopPlayers.Length);
             for (var i = 0; i < TopPlayers.Length; i++)
             {
