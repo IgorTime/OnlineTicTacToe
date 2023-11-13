@@ -3,7 +3,7 @@ using TTC.Shared;
 using TTC.Shared.Attributes;
 using TTC.Shared.Handlers;
 using TTC.Shared.Packets.ServerClient;
-using UnityEditor;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace TTT.Client.PacketHandlers
@@ -13,7 +13,7 @@ namespace TTT.Client.PacketHandlers
     {
         public static Action<NetOnServerStatus> OnServerStatus;
 
-        [InitializeOnLoadMethod]
+        [RuntimeInitializeOnLoadMethod]
         private static void ResetState()
         {
             OnServerStatus = null;

@@ -1,3 +1,4 @@
+using System;
 using TTC.Shared.Packets.ClientServer;
 using TTC.Shared.Packets.ServerClient;
 using TTT.Client.PacketHandlers;
@@ -17,6 +18,11 @@ namespace TTT.Client.Lobby
         {
             OnServerStatusRequestHandler.OnServerStatus += Refresh;
             RequestServerStatus();
+        }
+
+        private void OnDestroy()
+        {
+            OnServerStatusRequestHandler.OnServerStatus -= Refresh;
         }
 
         private void RequestServerStatus()
