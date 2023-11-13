@@ -1901,6 +1901,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5863abc02ba07b46ae071feb19034e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  topPlayersContainer: {fileID: 224425654}
+  topPlayerPrefab: {fileID: 8614911770886048523, guid: 8570d8520678d3c40817c33327ed5abc, type: 3}
 --- !u!1 &1301732203
 GameObject:
   m_ObjectHideFlags: 0
