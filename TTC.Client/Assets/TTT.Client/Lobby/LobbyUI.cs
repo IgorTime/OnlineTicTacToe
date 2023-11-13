@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using TTC.Shared.Packets.ClientServer;
 using TTC.Shared.Packets.ServerClient;
 using TTT.Client.PacketHandlers;
@@ -13,6 +14,9 @@ namespace TTT.Client.Lobby
         
         [SerializeField]
         private PlayerRow topPlayerPrefab;
+
+        [SerializeField] 
+        private TextMeshProUGUI onlinePlayersCount;
         
         private void Start()
         {
@@ -35,6 +39,7 @@ namespace TTT.Client.Lobby
         {
             DestroyAllChildren(topPlayersContainer);
             CreateTopPlayers(message.TopPlayers);
+            onlinePlayersCount.text = $"{message.PlayersCount} players online";
         }
 
         private void CreateTopPlayers(PlayerNetDto[] topPlayers)

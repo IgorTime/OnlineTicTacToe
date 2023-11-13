@@ -8,20 +8,20 @@ public class InMemoryUserRepository : IUserRepository
     {
         users = new List<User>
         {
-            new()
-            {
-                Id = "User1",
-                Password = "Pass1",
-                IsOnline = true,
-                Score = 10,
-            },
-            new()
-            {
-                Id = "User2",
-                Password = "Pass2",
-                IsOnline = true,
-                Score = 35,
-            },
+            // new()
+            // {
+            //     Id = "User1",
+            //     Password = "Pass1",
+            //     IsOnline = true,
+            //     Score = 10,
+            // },
+            // new()
+            // {
+            //     Id = "User2",
+            //     Password = "Pass2",
+            //     IsOnline = true,
+            //     Score = 35,
+            // },
         };
     }
 
