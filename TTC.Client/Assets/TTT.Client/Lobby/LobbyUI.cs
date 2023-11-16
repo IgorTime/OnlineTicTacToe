@@ -21,13 +21,37 @@ namespace TTT.Client.Lobby
         private TextMeshProUGUI onlinePlayersCount;
 
         [SerializeField] 
+        private RectTransform loadingPanel;
+
+        [Header("Buttons")]
+        [SerializeField] 
         private Button logoutButton;
+        
+        [SerializeField] 
+        private Button findOpponentButton;
+        
+        [SerializeField]
+        private Button cancelFindOpponentButton;
         
         private void Start()
         {
             OnServerStatusRequestHandler.OnServerStatus += Refresh;
             RequestServerStatus();
             logoutButton.onClick.AddListener(OnLogoutButtonClicked);
+            findOpponentButton.onClick.AddListener(OnFindOpponentButtonClicked);
+            cancelFindOpponentButton.onClick.AddListener(OnCancelFindOpponentButtonClicked);
+        }
+
+        private void OnCancelFindOpponentButtonClicked()
+        {
+            findOpponentButton.gameObject.SetActive(true);
+            loadingPanel.gameObject.SetActive(false);
+        }
+
+        private void OnFindOpponentButtonClicked()
+        {
+            findOpponentButton.gameObject.SetActive(false);
+            loadingPanel.gameObject.SetActive(true);
         }
 
         private void OnLogoutButtonClicked()
