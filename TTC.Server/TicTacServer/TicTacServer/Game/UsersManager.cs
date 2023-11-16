@@ -7,16 +7,13 @@ namespace TicTacServer.Game;
 public class UsersManager
 {
     private readonly IUserRepository userRepository;
-    private readonly NetworkServer server;
     private readonly Dictionary<int, ServerConnection> connetions;
 
     public UsersManager(
-        IUserRepository userRepository,
-        NetworkServer server)
+        IUserRepository userRepository)
     {
         connetions = new Dictionary<int, ServerConnection>();
         this.userRepository = userRepository;
-        this.server = server;
     }
 
     public void AddConnection(NetPeer peer)
@@ -60,7 +57,7 @@ public class UsersManager
         return true;
     }
 
-    public void Disconnect(int peerId)
+    public void Disconnect(int peerId, NetworkServer server)
     {
         var connection = GetConnection(peerId);
         if (connection.User != null)

@@ -56,7 +56,7 @@ public class NetworkServer : INetEventListener
     {
         var connection = usersManager.GetConnection(peer.Id);
         netManager.DisconnectPeer(peer);
-        usersManager.Disconnect(peer.Id);
+        usersManager.Disconnect(peer.Id, this);
         logger.LogInformation($"{connection?.User?.Id} disconnected: {peer.EndPoint}");
     }
 
