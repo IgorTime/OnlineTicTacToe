@@ -134,7 +134,7 @@ namespace TTT.Client
             return packet;
         }
 
-        private void Disconnect()
+        public void Disconnect()
         {
             netManager.DisconnectAll();
         }
