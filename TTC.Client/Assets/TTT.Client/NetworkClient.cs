@@ -12,11 +12,11 @@ namespace TTT.Client
 {
     public class NetworkClient : MonoBehaviour, INetEventListener
     {
+        private PacketHandlerRegistry handlerRegistry;
         private NetManager netManager;
+        private PacketRegistry packetRegistry;
         private NetPeer server;
         private NetDataWriter writer;
-        private PacketRegistry packetRegistry;
-        private PacketHandlerRegistry handlerRegistry;
 
         public static NetworkClient Instance { get; private set; }
         public bool IsConnected => server != null;
@@ -40,24 +40,17 @@ namespace TTT.Client
             netManager?.PollEvents();
         }
 
-        public void Connect()
-        {
-            netManager.Connect("localhost", 9050, "");
-        }
-
-        public void SendServer<T>(T packed, DeliveryMethod method = DeliveryMethod.ReliableOrdered)
-            where T : INetPacket
+        private void OnDestroy()
         {
             if (server != null)
             {
-                writer.Reset();
-                packed.Serialize(writer);
-                server.Send(writer, method);
+                netManager.Stop();
             }
-            else
-            {
-                Debug.Log("Not connected to server");
-            }
+        }
+
+        private void OnApplicationQuit()
+        {
+            Disconnect();
         }
 
         public void OnPeerConnected(NetPeer peer)
@@ -82,28 +75,11 @@ namespace TTT.Client
             byte channelNumber,
             DeliveryMethod deliveryMethod)
         {
-            var packetType = (PacketType) reader.GetByte();
+            var packetType = (PacketType)reader.GetByte();
             var packet = ResolvePacket(packetType, reader);
             var handler = ResolveHandler(packetType);
             handler.Handle(packet, peer.Id);
             reader.Recycle();
-        }
-
-        private IPacketHandler ResolveHandler(PacketType packetType)
-        {
-            // TODO refactor this
-            var type = handlerRegistry[packetType];
-            var handler = (IPacketHandler) Activator.CreateInstance(type);
-            return handler;
-        }
-
-        private INetPacket ResolvePacket(PacketType packetType, NetPacketReader reader)
-        {
-            //TODO refactor this
-            var type = packetRegistry[packetType];
-            var packet = (INetPacket) Activator.CreateInstance(type);
-            packet.Deserialize(reader);
-            return packet;
         }
 
         public void OnNetworkReceiveUnconnected(
@@ -121,6 +97,48 @@ namespace TTT.Client
         {
         }
 
+        public void Connect()
+        {
+            netManager.Connect("localhost", 9050, "");
+        }
+
+        public void SendServer<T>(T packed, DeliveryMethod method = DeliveryMethod.ReliableOrdered)
+            where T : INetPacket
+        {
+            if (server != null)
+            {
+                writer.Reset();
+                packed.Serialize(writer);
+                server.Send(writer, method);
+            }
+            else
+            {
+                Debug.Log("Not connected to server");
+            }
+        }
+
+        private IPacketHandler ResolveHandler(PacketType packetType)
+        {
+            // TODO refactor this
+            var type = handlerRegistry[packetType];
+            var handler = (IPacketHandler)Activator.CreateInstance(type);
+            return handler;
+        }
+
+        private INetPacket ResolvePacket(PacketType packetType, NetPacketReader reader)
+        {
+            //TODO refactor this
+            var type = packetRegistry[packetType];
+            var packet = (INetPacket)Activator.CreateInstance(type);
+            packet.Deserialize(reader);
+            return packet;
+        }
+
+        private void Disconnect()
+        {
+            netManager.DisconnectAll();
+        }
+
         private void Init()
         {
             packetRegistry = new PacketRegistry();
@@ -128,7 +146,7 @@ namespace TTT.Client
             writer = new NetDataWriter();
             netManager = new NetManager(this)
             {
-                DisconnectTimeout = 10_000,
+                DisconnectTimeout = 10_000
             };
 
             netManager.Start();

@@ -5,7 +5,6 @@ using LiteNetLib.Utils;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using TicTacServer.Game;
-using TicTacServer.PacketHandlers;
 using TTC.Shared;
 using TTC.Shared.Handlers;
 using TTC.Shared.Registries;

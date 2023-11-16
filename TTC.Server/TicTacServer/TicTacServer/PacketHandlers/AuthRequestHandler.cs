@@ -53,16 +53,9 @@ public class AuthRequestHandler : IPacketHandler
 
     private void NotifyOtherPlayers(int excludeConnectionId)
     {
-        var responseMessage = new NetOnServerStatus()
-        {
-            PlayersCount = userRepository.GetTotalCount(),
-            TopPlayers = usersManager.GetTopPlayers(),
-        };
-
-        var otherIds = usersManager.GetOtherConnectionIds(excludeConnectionId);
-        foreach (var id in otherIds)
-        {
-            server.SendClient(id, responseMessage);
-        }
+        server.NotifyOtherPlayers(
+            userRepository.GetTotalCount(),
+            usersManager.GetTopPlayers(),
+            usersManager.GetOtherConnectionIds(excludeConnectionId));
     }
 }
