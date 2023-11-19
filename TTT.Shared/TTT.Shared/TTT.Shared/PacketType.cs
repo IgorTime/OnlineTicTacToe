@@ -1,4 +1,4 @@
-﻿namespace TTC.Shared
+﻿namespace TTT.Shared
 {
     public enum PacketType : byte
     {

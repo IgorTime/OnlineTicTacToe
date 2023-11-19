@@ -1,6 +1,6 @@
 ﻿using LiteNetLib.Utils;
 
-namespace TTC.Shared.Handlers
+namespace TTT.Shared.Handlers
 {
     public abstract class PacketHandler<T> : IPacketHandler
         where T : struct, INetPacket

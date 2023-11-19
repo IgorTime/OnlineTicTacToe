@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TTC.Shared", "TTC.Shared\TTC.Shared.csproj", "{6388828A-43E5-4A2C-911E-3A020A91A7DB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TTT.Shared", "TTT.Shared\TTT.Shared.csproj", "{6388828A-43E5-4A2C-911E-3A020A91A7DB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

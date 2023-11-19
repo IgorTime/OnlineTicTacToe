@@ -1,10 +1,10 @@
 using LiteNetLib.Utils;
 
-namespace TTC.Shared.Packets.ClientServer
+namespace TTT.Shared.Packets.ServerClient
 {
-    public struct NetCancelFindOpponentRequest : INetPacket
+    public struct NetOnAuthFail : INetPacket
     {
-        public PacketType Type => PacketType.CancelFindOpponentRequest;
+        public PacketType Type => PacketType.OnAuthFail;
 
         public void Serialize(NetDataWriter writer)
         {

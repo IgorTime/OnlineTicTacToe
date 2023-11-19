@@ -1,6 +1,6 @@
 ﻿using LiteNetLib.Utils;
 
-namespace TTC.Shared.Packets.ClientServer
+namespace TTT.Shared.Packets.ClientServer
 {
     public struct NetServerStatusRequest : INetPacket
     {

@@ -1,6 +1,6 @@
 ﻿using LiteNetLib.Utils;
 
-namespace TTC.Shared.Extensions
+namespace TTT.Shared.Extensions
 {
     public static class WriterExtensions
     {

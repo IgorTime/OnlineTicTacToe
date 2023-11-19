@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using TTC.Shared.Attributes;
-using TTC.Shared.Handlers;
+using TTT.Shared.Attributes;
+using TTT.Shared.Handlers;
 
-namespace TTC.Shared.Registries
+namespace TTT.Shared.Registries
 {
     public class PacketHandlerRegistry
     {

@@ -1,6 +1,6 @@
 ﻿using LiteNetLib.Utils;
 
-namespace TTC.Shared
+namespace TTT.Shared
 {
     public interface INetPacket : INetSerializable
     {

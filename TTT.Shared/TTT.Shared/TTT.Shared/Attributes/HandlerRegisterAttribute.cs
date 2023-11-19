@@ -1,6 +1,6 @@
 using System;
 
-namespace TTC.Shared.Attributes
+namespace TTT.Shared.Attributes
 {
     [AttributeUsage(AttributeTargets.Class)]
     public class HandlerRegisterAttribute : Attribute

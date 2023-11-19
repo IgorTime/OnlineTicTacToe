@@ -1,10 +1,10 @@
 using LiteNetLib.Utils;
 
-namespace TTC.Shared.Packets.ServerClient
+namespace TTT.Shared.Packets.ServerClient
 {
-    public struct NetOnAuthFail : INetPacket
+    public struct NetOnAuth : INetPacket
     {
-        public PacketType Type => PacketType.OnAuthFail;
+        public PacketType Type => PacketType.OnAuth;
 
         public void Serialize(NetDataWriter writer)
         {
