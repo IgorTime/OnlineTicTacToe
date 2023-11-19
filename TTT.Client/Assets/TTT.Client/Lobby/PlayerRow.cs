@@ -5,10 +5,17 @@ using UnityEngine.UI;
 
 public class PlayerRow : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI userName;
-    [SerializeField] private TextMeshProUGUI score;
-    [SerializeField] private Image onlineStatus;
-    [SerializeField] private Image offlineStatus;
+    [SerializeField]
+    private TextMeshProUGUI userName;
+
+    [SerializeField]
+    private TextMeshProUGUI score;
+
+    [SerializeField]
+    private Image onlineStatus;
+
+    [SerializeField]
+    private Image offlineStatus;
 
     public void Initialize(PlayerNetDto playerNetDto)
     {

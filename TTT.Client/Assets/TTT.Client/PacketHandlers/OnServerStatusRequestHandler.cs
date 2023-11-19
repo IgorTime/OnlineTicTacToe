@@ -21,7 +21,10 @@ namespace TTT.Client.PacketHandlers
 
         protected override void Handle(NetOnServerStatus packet, int connectionId)
         {
-            if (SceneManager.GetActiveScene().name != "01_Lobby") return;
+            if (SceneManager.GetActiveScene().name != "01_Lobby")
+            {
+                return;
+            }
 
             OnServerStatus?.Invoke(packet);
         }
