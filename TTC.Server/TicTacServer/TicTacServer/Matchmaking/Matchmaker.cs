@@ -6,12 +6,15 @@ namespace TicTacServer.Matchmaking;
 public class Matchmaker
 {
     private readonly ILogger<Matchmaker> logger;
-    private List<MatchmakingRequest> pool = new();
+    private readonly GamesManager gamesManager;
+    private readonly List<MatchmakingRequest> pool = new();
 
     public Matchmaker(
-        ILogger<Matchmaker> logger)
+        ILogger<Matchmaker> logger,
+        GamesManager gamesManager)
     {
         this.logger = logger;
+        this.gamesManager = gamesManager;
     }
     
     public void RegisterPlayer(ServerConnection connection)
@@ -46,5 +49,30 @@ public class Matchmaker
     private void DoMatchmaking()
     {
         logger.LogInformation("Doing matchmaking...");
+
+        for (var i = 0; i < pool.Count; i++)
+        {
+            var request = pool[i];
+            var match = pool.FirstOrDefault(x => !x.MatchFound && x.Connection.User.Id != pool[i].Connection.User.Id);
+            if (match == null)
+            {
+                continue;
+            }
+            
+            match.MatchFound = true;
+            request.MatchFound = true;
+            pool.Remove(match);
+            pool.Remove(request);
+            i -= 2;
+
+            var xUser = request.Connection.User.Id;
+            var oUser = match.Connection.User.Id;
+            var gameId = gamesManager.RegisterGame(xUser, oUser);
+            request.Connection.GameId = gameId;
+            match.Connection.GameId = gameId;
+            // Send message OnGameStart
+            
+            logger.LogInformation($"Match found: {xUser}(X) vs {oUser}(O)");
+        }
     }
 }
