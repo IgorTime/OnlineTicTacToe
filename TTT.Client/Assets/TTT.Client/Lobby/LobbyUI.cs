@@ -1,7 +1,7 @@
 using System;
 using TMPro;
-using TTC.Shared.Packets.ClientServer;
-using TTC.Shared.Packets.ServerClient;
+using TTT.Shared.Packets.ClientServer;
+using TTT.Shared.Packets.ServerClient;
 using TTT.Client.PacketHandlers;
 using UnityEngine;
 using UnityEngine.SceneManagement;

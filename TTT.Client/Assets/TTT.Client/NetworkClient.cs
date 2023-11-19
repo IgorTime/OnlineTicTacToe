@@ -3,10 +3,10 @@ using System.Net;
 using System.Net.Sockets;
 using LiteNetLib;
 using LiteNetLib.Utils;
-using TTC.Shared;
-using TTC.Shared.Extensions;
-using TTC.Shared.Handlers;
-using TTC.Shared.Registries;
+using TTT.Shared;
+using TTT.Shared.Extensions;
+using TTT.Shared.Handlers;
+using TTT.Shared.Registries;
 using UnityEngine;
 
 namespace TTT.Client
