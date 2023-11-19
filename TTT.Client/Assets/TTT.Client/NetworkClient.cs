@@ -6,7 +6,6 @@ using LiteNetLib.Utils;
 using TTT.Client.PacketHandlers;
 using TTT.Shared;
 using TTT.Shared.Extensions;
-using TTT.Shared.Registries;
 using UnityEngine;
 using VContainer.Unity;
 
@@ -19,8 +18,8 @@ namespace TTT.Client
         ITickable,
         IDisposable
     {
+        private readonly NetworkSettings settings;
         private readonly IPacketHandlerResolver packetHandlerResolver;
-        private PacketHandlerRegistry handlerRegistry;
         private NetManager netManager;
         private NetPeer server;
         private NetDataWriter writer;
@@ -28,11 +27,13 @@ namespace TTT.Client
         public bool IsConnected => server != null;
 
         public NetworkClient(
+            NetworkSettings settings,
             IPacketHandlerResolver packetHandlerResolver)
         {
+            this.settings = settings;
             this.packetHandlerResolver = packetHandlerResolver;
         }
-        
+
         public void Start()
         {
             Init();
@@ -88,7 +89,7 @@ namespace TTT.Client
 
         public void Connect()
         {
-            netManager.Connect("localhost", 9050, "");
+            netManager.Connect(settings.address, settings.port, "");
         }
 
         public void SendServer<T>(T packed, DeliveryMethod method = DeliveryMethod.ReliableOrdered)
@@ -116,11 +117,10 @@ namespace TTT.Client
 
         private void Init()
         {
-            handlerRegistry = new PacketHandlerRegistry();
             writer = new NetDataWriter();
             netManager = new NetManager(this)
             {
-                DisconnectTimeout = 10_000,
+                DisconnectTimeout = settings.disconnectTimeout,
             };
 
             netManager.Start();
