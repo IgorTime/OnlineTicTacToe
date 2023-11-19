@@ -11,7 +11,6 @@ namespace TTC.Shared.Packets.ServerClient
         
         public void Serialize(NetDataWriter writer)
         {
-            writer.Put((byte) Type);
             writer.Put(PlayersCount);
             writer.Put((ushort)TopPlayers.Length);
             for (var i = 0; i < TopPlayers.Length; i++)

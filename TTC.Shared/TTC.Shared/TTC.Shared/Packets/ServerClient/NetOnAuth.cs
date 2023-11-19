@@ -8,7 +8,6 @@ namespace TTC.Shared.Packets.ServerClient
 
         public void Serialize(NetDataWriter writer)
         {
-            writer.Put((byte) Type);
         }
 
         public void Deserialize(NetDataReader reader)

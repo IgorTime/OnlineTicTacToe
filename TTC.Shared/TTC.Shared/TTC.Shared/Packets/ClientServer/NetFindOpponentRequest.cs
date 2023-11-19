@@ -2,9 +2,9 @@
 
 namespace TTC.Shared.Packets.ClientServer
 {
-    public struct NetServerStatusRequest : INetPacket
+    public struct NetFindOpponentRequest : INetPacket
     {
-        public PacketType Type => PacketType.ServerStatusRequest;
+        public PacketType Type => PacketType.FindOpponentRequest;
 
         public void Serialize(NetDataWriter writer)
         {

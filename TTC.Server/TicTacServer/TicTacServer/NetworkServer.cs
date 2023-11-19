@@ -134,6 +134,7 @@ public class NetworkServer : INetEventListener
         where T : INetPacket
     {
         writer.Reset();
+        writer.Put((byte)packet.Type);
         packet.Serialize(writer);
         return writer;
     }

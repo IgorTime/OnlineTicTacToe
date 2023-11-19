@@ -10,7 +10,6 @@ namespace TTC.Shared.Packets.ClientServer
 
         public void Serialize(NetDataWriter writer)
         {
-            writer.Put((byte) Type);
             writer.Put(Username);
             writer.Put(Password);
         }

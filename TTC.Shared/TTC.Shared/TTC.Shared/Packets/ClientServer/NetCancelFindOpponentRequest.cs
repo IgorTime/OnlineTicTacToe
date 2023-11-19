@@ -1,10 +1,10 @@
-﻿using LiteNetLib.Utils;
+using LiteNetLib.Utils;
 
 namespace TTC.Shared.Packets.ClientServer
 {
-    public struct NetServerStatusRequest : INetPacket
+    public struct NetCancelFindOpponentRequest : INetPacket
     {
-        public PacketType Type => PacketType.ServerStatusRequest;
+        public PacketType Type => PacketType.CancelFindOpponentRequest;
 
         public void Serialize(NetDataWriter writer)
         {

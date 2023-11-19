@@ -7,6 +7,8 @@
         Invalid = 0,
         AuthRequest = 1,
         ServerStatusRequest = 2,
+        FindOpponentRequest = 3,
+        CancelFindOpponentRequest = 4,
 
         #endregion
 
@@ -15,7 +17,7 @@
         OnAuth = 100,
         OnAuthFail = 101,
         OnServerStatus = 102,
-
+        OnFindOpponent = 103,
         #endregion
     }
 }
