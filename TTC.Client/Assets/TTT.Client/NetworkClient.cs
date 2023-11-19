@@ -108,6 +108,7 @@ namespace TTT.Client
             if (server != null)
             {
                 writer.Reset();
+                writer.Put((byte)packed.Type);
                 packed.Serialize(writer);
                 server.Send(writer, method);
             }

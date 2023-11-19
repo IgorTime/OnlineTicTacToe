@@ -35,6 +35,7 @@ namespace TTT.Client.Lobby
         
         private void Start()
         {
+            
             OnServerStatusRequestHandler.OnServerStatus += Refresh;
             RequestServerStatus();
             logoutButton.onClick.AddListener(OnLogoutButtonClicked);
@@ -46,12 +47,16 @@ namespace TTT.Client.Lobby
         {
             findOpponentButton.gameObject.SetActive(true);
             loadingPanel.gameObject.SetActive(false);
+            var msg = new NetCancelFindOpponentRequest();
+            NetworkClient.Instance.SendServer(msg);
         }
 
         private void OnFindOpponentButtonClicked()
         {
             findOpponentButton.gameObject.SetActive(false);
             loadingPanel.gameObject.SetActive(true);
+            var msg = new NetFindOpponentRequest();
+            NetworkClient.Instance.SendServer(msg);
         }
 
         private void OnLogoutButtonClicked()
