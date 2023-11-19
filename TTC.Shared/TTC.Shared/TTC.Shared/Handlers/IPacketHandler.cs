@@ -1,7 +1,9 @@
-﻿namespace TTC.Shared.Handlers
+﻿using LiteNetLib.Utils;
+
+namespace TTC.Shared.Handlers
 {
     public interface IPacketHandler
     {
-        void Handle(INetPacket packet, int connectionId);
+        void Handle(NetDataReader packetReader, int connectionId);
     }
 }

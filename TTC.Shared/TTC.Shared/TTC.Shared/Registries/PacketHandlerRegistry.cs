@@ -22,8 +22,7 @@ namespace TTC.Shared.Registries
         {
             var handlers = AppDomain.CurrentDomain.GetAssemblies()
                                     .SelectMany(x => x.DefinedTypes)
-                                    .Where(t => t is
-                                         {IsInterface: false, IsAbstract: false, IsGenericTypeDefinition: false})
+                                    .Where(t => t is {IsInterface: false, IsAbstract: false})
                                     .Where(x => typeof(IPacketHandler).IsAssignableFrom(x))
                                     .Select(t => (type: t, attibute: t.GetCustomAttribute<HandlerRegisterAttribute>()))
                                     .Where(x => x.attibute != null);

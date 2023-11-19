@@ -3,12 +3,13 @@ using TicTacServer.Game;
 using TTC.Shared;
 using TTC.Shared.Attributes;
 using TTC.Shared.Handlers;
+using TTC.Shared.Packets.ClientServer;
 using TTC.Shared.Packets.ServerClient;
 
 namespace TicTacServer.PacketHandlers;
 
 [HandlerRegister(PacketType.ServerStatusRequest)]
-public class ServerStatusRequestHandler : IPacketHandler
+public class ServerStatusRequestHandler : PacketHandler<NetServerStatusRequest>
 {
     private readonly NetworkServer server;
     private readonly IUserRepository userRepository;
@@ -23,15 +24,15 @@ public class ServerStatusRequestHandler : IPacketHandler
         this.userRepository = userRepository;
         this.usersManager = usersManager;
     }
-                                          
-    public void Handle(INetPacket packet, int connectionId)
+
+    protected override void Handle(NetServerStatusRequest packet, int connectionId)
     {
-        var msg = new NetOnServerStatus()
+        var msg = new NetOnServerStatus
         {
             PlayersCount = userRepository.GetTotalCount(),
             TopPlayers = usersManager.GetTopPlayers(),
         };
-        
+
         server.SendClient(connectionId, msg);
     }
 }

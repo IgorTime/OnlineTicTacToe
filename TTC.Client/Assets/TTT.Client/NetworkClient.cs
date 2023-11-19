@@ -15,7 +15,6 @@ namespace TTT.Client
     {
         private PacketHandlerRegistry handlerRegistry;
         private NetManager netManager;
-        private PacketRegistry packetRegistry;
         private NetPeer server;
         private NetDataWriter writer;
 
@@ -77,9 +76,8 @@ namespace TTT.Client
             DeliveryMethod deliveryMethod)
         {
             var packetType = (PacketType)reader.GetByte();
-            var packet = ResolvePacket(packetType, reader);
             var handler = ResolveHandler(packetType);
-            handler.Handle(packet, peer.Id);
+            handler.Handle(reader, peer.Id);
             reader.Recycle();
         }
 
@@ -124,15 +122,6 @@ namespace TTT.Client
             return handler;
         }
 
-        private INetPacket ResolvePacket(PacketType packetType, NetPacketReader reader)
-        {
-            //TODO refactor this
-            var type = packetRegistry[packetType];
-            var packet = (INetPacket)Activator.CreateInstance(type);
-            packet.Deserialize(reader);
-            return packet;
-        }
-
         public void Disconnect()
         {
             netManager.DisconnectAll();
@@ -140,7 +129,6 @@ namespace TTT.Client
 
         private void Init()
         {
-            packetRegistry = new PacketRegistry();
             handlerRegistry = new PacketHandlerRegistry();
             writer = new NetDataWriter();
             netManager = new NetManager(this)

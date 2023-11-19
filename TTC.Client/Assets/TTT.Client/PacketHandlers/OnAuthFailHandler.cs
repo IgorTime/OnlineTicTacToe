@@ -7,13 +7,13 @@ using TTC.Shared.Packets.ServerClient;
 namespace TTT.Client.PacketHandlers
 {
     [HandlerRegister(PacketType.OnAuthFail)]
-    public class OnAuthFailHandler : IPacketHandler
+    public class OnAuthFailHandler : PacketHandler<NetOnAuthFail>
     {
         public static event Action<NetOnAuthFail> OnAuthFail;
-        public void Handle(INetPacket packet, int connectionId)
+
+        protected override void Handle(NetOnAuthFail packet, int connectionId)
         {
-            var message = (NetOnAuthFail) packet;
-            OnAuthFail?.Invoke(message);
+            OnAuthFail?.Invoke(packet);
         }
     }
 }

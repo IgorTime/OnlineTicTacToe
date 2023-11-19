@@ -10,7 +10,7 @@ using TTC.Shared.Packets.ServerClient;
 namespace TicTacServer.PacketHandlers;
 
 [HandlerRegister(PacketType.AuthRequest)]
-public class AuthRequestHandler : IPacketHandler
+public class AuthRequestHandler : PacketHandler<NetAuthRequest>
 {
     private readonly ILogger<AuthRequestHandler> logger;
     private readonly IUserRepository userRepository;
@@ -29,9 +29,8 @@ public class AuthRequestHandler : IPacketHandler
         this.server = server;
     }
 
-    public void Handle(INetPacket packet, int connectionId)
+    protected override void Handle(NetAuthRequest message, int connectionId)
     {
-        var message = (NetAuthRequest) packet;
         logger.LogInformation($"Received auth request from {message.Username}" +
                               $"with password: {message.Password}");
 

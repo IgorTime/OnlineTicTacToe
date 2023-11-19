@@ -76,10 +76,8 @@ public class NetworkServer : INetEventListener
 
         try
         {
-            var packet = ResolvePacket((PacketType) packetType, reader);
             var handler = ResolveHandler((PacketType) packetType);
-            handler.Handle(packet, peer.Id);
-
+            handler.Handle(reader, peer.Id);
             reader.Recycle();
         }
         catch (Exception ex)
@@ -120,14 +118,5 @@ public class NetworkServer : INetEventListener
         var registry = serviceProvider.GetRequiredService<PacketHandlerRegistry>();
         var type = registry[packetType];
         return (IPacketHandler) serviceProvider.GetRequiredService(type);
-    }
-
-    private INetPacket ResolvePacket(PacketType packetType, NetPacketReader reader)
-    {
-        var registry = serviceProvider.GetRequiredService<PacketRegistry>();
-        var type = registry[packetType];
-        var packet = (INetPacket) Activator.CreateInstance(type);
-        packet.Deserialize(reader);
-        return packet;
     }
 }

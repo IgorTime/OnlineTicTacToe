@@ -20,7 +20,6 @@ public static class Container
     {
         services.AddLogging(c => c.AddSimpleConsole());
         services.AddSingleton<NetworkServer>();
-        services.AddSingleton<PacketRegistry>();
         services.AddSingleton<PacketHandlerRegistry>();
         services.AddSingleton<IUserRepository, InMemoryUserRepository>();
         services.AddSingleton<UsersManager>();

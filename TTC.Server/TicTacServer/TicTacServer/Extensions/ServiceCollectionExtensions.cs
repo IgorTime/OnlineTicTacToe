@@ -1,6 +1,5 @@
 ﻿using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
-using TicTacServer.PacketHandlers;
 using TTC.Shared.Attributes;
 using TTC.Shared.Handlers;
 
@@ -12,13 +11,12 @@ public static class ServiceCollectionExtensions
     {
         var handlers = AppDomain.CurrentDomain.GetAssemblies()
                                 .SelectMany(x => x.DefinedTypes)
-                                .Where(t => t is
-                                     {IsInterface: false, IsAbstract: false, IsGenericTypeDefinition: false})
+                                .Where(t => t is {IsInterface: false, IsAbstract: false})
                                 .Where(x => typeof(IPacketHandler).IsAssignableFrom(x))
                                 .Select(t => (type: t, attibute: t.GetCustomAttribute<HandlerRegisterAttribute>()))
                                 .Where(x => x.attibute != null);
 
-        foreach (var (type, attribute) in handlers)
+        foreach (var (type, _) in handlers)
         {
             serviceCollection.AddScoped(type);
         }

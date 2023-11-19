@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 namespace TTT.Client.PacketHandlers
 {
     [HandlerRegister(PacketType.OnServerStatus)]
-    public class OnServerStatusRequestHandler : IPacketHandler
+    public class OnServerStatusRequestHandler : PacketHandler<NetOnServerStatus>
     {
         public static Action<NetOnServerStatus> OnServerStatus;
 
@@ -18,16 +18,12 @@ namespace TTT.Client.PacketHandlers
         {
             OnServerStatus = null;
         }
-        
-        public void Handle(INetPacket packet, int connectionId)
+
+        protected override void Handle(NetOnServerStatus packet, int connectionId)
         {
-            if (SceneManager.GetActiveScene().name != "01_Lobby")
-            {
-                return;
-            }
-            
-            var msg = (NetOnServerStatus) packet;
-            OnServerStatus?.Invoke(msg);
+            if (SceneManager.GetActiveScene().name != "01_Lobby") return;
+
+            OnServerStatus?.Invoke(packet);
         }
     }
 }
