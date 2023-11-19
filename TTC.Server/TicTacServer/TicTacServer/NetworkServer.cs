@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using TicTacServer.Game;
 using TTC.Shared;
+using TTC.Shared.Extensions;
 using TTC.Shared.Handlers;
 using TTC.Shared.Registries;
 
@@ -108,10 +109,10 @@ public class NetworkServer : INetEventListener
         int peerId,
         T packet,
         DeliveryMethod method = DeliveryMethod.ReliableOrdered)
-        where T : INetPacket
+        where T : struct, INetPacket
     {
         var peer = usersManager.GetConnection(peerId).Peer;
-        peer.Send(WriteSerializable(packet), method);
+        peer.Send(writer.SerializeNetPacket(packet), method);
     }
 
     private IPacketHandler ResolveHandler(PacketType packetType)
@@ -128,14 +129,5 @@ public class NetworkServer : INetEventListener
         var packet = (INetPacket) Activator.CreateInstance(type);
         packet.Deserialize(reader);
         return packet;
-    }
-
-    private NetDataWriter WriteSerializable<T>(T packet)
-        where T : INetPacket
-    {
-        writer.Reset();
-        writer.Put((byte)packet.Type);
-        packet.Serialize(writer);
-        return writer;
     }
 }

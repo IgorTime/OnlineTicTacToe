@@ -4,6 +4,7 @@ using System.Net.Sockets;
 using LiteNetLib;
 using LiteNetLib.Utils;
 using TTC.Shared;
+using TTC.Shared.Extensions;
 using TTC.Shared.Handlers;
 using TTC.Shared.Registries;
 using UnityEngine;
@@ -103,14 +104,11 @@ namespace TTT.Client
         }
 
         public void SendServer<T>(T packed, DeliveryMethod method = DeliveryMethod.ReliableOrdered)
-            where T : INetPacket
+            where T : struct, INetPacket
         {
             if (server != null)
             {
-                writer.Reset();
-                writer.Put((byte)packed.Type);
-                packed.Serialize(writer);
-                server.Send(writer, method);
+                server.Send(writer.SerializeNetPacket(packed), method);
             }
             else
             {
