@@ -8,49 +8,33 @@ using TTT.Shared.Extensions;
 using TTT.Shared.Handlers;
 using TTT.Shared.Registries;
 using UnityEngine;
+using VContainer.Unity;
 
 namespace TTT.Client
 {
-    public class NetworkClient : MonoBehaviour, INetEventListener
+    public class NetworkClient :
+        INetworkClient,
+        INetEventListener,
+        IStartable,
+        ITickable,
+        IDisposable
     {
         private PacketHandlerRegistry handlerRegistry;
         private NetManager netManager;
         private NetPeer server;
         private NetDataWriter writer;
 
-        public static NetworkClient Instance { get; private set; }
+        public static NetworkClient Instance { get; }
         public bool IsConnected => server != null;
 
-        private void Awake()
-        {
-            if (Instance == null)
-            {
-                Instance = this;
-                DontDestroyOnLoad(gameObject);
-            }
-        }
-
-        private void Start()
+        public void Start()
         {
             Init();
         }
 
-        private void Update()
+        public void Tick()
         {
             netManager?.PollEvents();
-        }
-
-        private void OnDestroy()
-        {
-            if (server != null)
-            {
-                netManager.Stop();
-            }
-        }
-
-        private void OnApplicationQuit()
-        {
-            Disconnect();
         }
 
         public void OnPeerConnected(NetPeer peer)
@@ -75,7 +59,7 @@ namespace TTT.Client
             byte channelNumber,
             DeliveryMethod deliveryMethod)
         {
-            var packetType = (PacketType)reader.GetByte();
+            var packetType = (PacketType) reader.GetByte();
             var handler = ResolveHandler(packetType);
             handler.Handle(reader, peer.Id);
             reader.Recycle();
@@ -114,17 +98,21 @@ namespace TTT.Client
             }
         }
 
-        private IPacketHandler ResolveHandler(PacketType packetType)
-        {
-            // TODO refactor this
-            var type = handlerRegistry[packetType];
-            var handler = (IPacketHandler)Activator.CreateInstance(type);
-            return handler;
-        }
-
         public void Disconnect()
         {
-            netManager.DisconnectAll();
+            netManager?.DisconnectAll();
+        }
+
+        public void Dispose()
+        {
+            netManager?.Stop();
+        }
+
+        private IPacketHandler ResolveHandler(PacketType packetType)
+        {
+            var type = handlerRegistry[packetType];
+            var handler = (IPacketHandler) Activator.CreateInstance(type);
+            return handler;
         }
 
         private void Init()
@@ -133,7 +121,7 @@ namespace TTT.Client
             writer = new NetDataWriter();
             netManager = new NetManager(this)
             {
-                DisconnectTimeout = 10_000
+                DisconnectTimeout = 10_000,
             };
 
             netManager.Start();
