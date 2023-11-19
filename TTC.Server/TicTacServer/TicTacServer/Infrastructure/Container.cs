@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using TicTacServer.Data;
 using TicTacServer.Extensions;
 using TicTacServer.Game;
+using TicTacServer.Matchmaking;
 using TTC.Shared.Registries;
 
 namespace TicTacServer.Infrastructure;
@@ -23,6 +24,7 @@ public static class Container
         services.AddSingleton<PacketHandlerRegistry>();
         services.AddSingleton<IUserRepository, InMemoryUserRepository>();
         services.AddSingleton<UsersManager>();
+        services.AddSingleton<Matchmaker>();
         services.AddPacketHandlers();
     }
 }
