@@ -2377,7 +2377,7 @@ GameObject:
   - component: {fileID: 1342657752}
   - component: {fileID: 1342657753}
   m_Layer: 0
-  m_Name: _SCOPE2
+  m_Name: _SCOPE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2411,7 +2411,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parentReference:
-    TypeName: TTT.Client.Root.ApplicationScope
+    TypeName: TTT.Client.Scopes.ApplicationScope
   autoRun: 1
   autoInjectGameObjects:
   - {fileID: 1605622169}

@@ -2206,7 +2206,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parentReference:
-    TypeName: TTT.Client.Root.ApplicationScope
+    TypeName: TTT.Client.Scopes.ApplicationScope
   autoRun: 1
   autoInjectGameObjects:
   - {fileID: 1605622169}

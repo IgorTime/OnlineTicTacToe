@@ -1,6 +1,5 @@
-using TTT.Client.Root;
+using TTT.Client.Scopes;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Bootstrapper : MonoBehaviour
 {
@@ -11,7 +10,5 @@ public class Bootstrapper : MonoBehaviour
     {
         var container = Instantiate(applicationScope);
         DontDestroyOnLoad(container.gameObject);
-
-        SceneManager.LoadScene("00_Main");
     }
 }
