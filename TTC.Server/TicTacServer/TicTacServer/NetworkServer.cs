@@ -5,10 +5,10 @@ using LiteNetLib.Utils;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using TicTacServer.Game;
-using TTC.Shared;
-using TTC.Shared.Extensions;
-using TTC.Shared.Handlers;
-using TTC.Shared.Registries;
+using TTT.Shared;
+using TTT.Shared.Extensions;
+using TTT.Shared.Handlers;
+using TTT.Shared.Registries;
 
 namespace TicTacServer;
 

@@ -1,4 +1,4 @@
-﻿using TTC.Shared.Packets.ServerClient;
+﻿using TTT.Shared.Packets.ServerClient;
 
 namespace TicTacServer;
 

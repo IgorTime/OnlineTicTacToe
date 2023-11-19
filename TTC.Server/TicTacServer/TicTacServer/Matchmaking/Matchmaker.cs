@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using TicTacServer.Game;
-using TTC.Shared.Packets.ServerClient;
+using TTT.Shared.Packets.ServerClient;
 
 namespace TicTacServer.Matchmaking;
 

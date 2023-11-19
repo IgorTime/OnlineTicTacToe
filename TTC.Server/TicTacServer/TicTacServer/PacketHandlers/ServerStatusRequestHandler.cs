@@ -1,10 +1,10 @@
 ﻿using TicTacServer.Data;
 using TicTacServer.Game;
-using TTC.Shared;
-using TTC.Shared.Attributes;
-using TTC.Shared.Handlers;
-using TTC.Shared.Packets.ClientServer;
-using TTC.Shared.Packets.ServerClient;
+using TTT.Shared;
+using TTT.Shared.Attributes;
+using TTT.Shared.Handlers;
+using TTT.Shared.Packets.ClientServer;
+using TTT.Shared.Packets.ServerClient;
 
 namespace TicTacServer.PacketHandlers;
 

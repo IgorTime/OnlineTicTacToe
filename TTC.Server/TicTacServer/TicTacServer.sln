@@ -2,7 +2,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicTacServer", "TicTacServer\TicTacServer.csproj", "{44FCE52B-AA57-4502-B5D1-944F617BC329}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TTC.Shared", "..\..\TTC.Shared\TTC.Shared\TTC.Shared\TTC.Shared.csproj", "{2245CB57-3160-4FB7-B82A-DD6FE8E6DF35}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TTT.Shared", "..\..\TTT.Shared\TTT.Shared\TTT.Shared\TTT.Shared.csproj", "{3524CD25-BB54-4170-804B-79B0D9EC9D04}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -14,9 +14,9 @@ Global
 		{44FCE52B-AA57-4502-B5D1-944F617BC329}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{44FCE52B-AA57-4502-B5D1-944F617BC329}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{44FCE52B-AA57-4502-B5D1-944F617BC329}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2245CB57-3160-4FB7-B82A-DD6FE8E6DF35}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2245CB57-3160-4FB7-B82A-DD6FE8E6DF35}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2245CB57-3160-4FB7-B82A-DD6FE8E6DF35}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2245CB57-3160-4FB7-B82A-DD6FE8E6DF35}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3524CD25-BB54-4170-804B-79B0D9EC9D04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3524CD25-BB54-4170-804B-79B0D9EC9D04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3524CD25-BB54-4170-804B-79B0D9EC9D04}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3524CD25-BB54-4170-804B-79B0D9EC9D04}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

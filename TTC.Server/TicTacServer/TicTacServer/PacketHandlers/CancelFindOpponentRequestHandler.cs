@@ -1,7 +1,7 @@
-using TTC.Shared;
-using TTC.Shared.Attributes;
-using TTC.Shared.Handlers;
-using TTC.Shared.Packets.ClientServer;
+using TTT.Shared;
+using TTT.Shared.Attributes;
+using TTT.Shared.Handlers;
+using TTT.Shared.Packets.ClientServer;
 
 namespace TicTacServer.PacketHandlers;
 

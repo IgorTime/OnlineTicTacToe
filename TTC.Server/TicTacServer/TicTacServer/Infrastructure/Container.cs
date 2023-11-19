@@ -4,7 +4,7 @@ using TicTacServer.Data;
 using TicTacServer.Extensions;
 using TicTacServer.Game;
 using TicTacServer.Matchmaking;
-using TTC.Shared.Registries;
+using TTT.Shared.Registries;
 
 namespace TicTacServer.Infrastructure;
 

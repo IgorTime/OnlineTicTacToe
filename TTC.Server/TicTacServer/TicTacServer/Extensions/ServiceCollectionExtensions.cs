@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
-using TTC.Shared.Attributes;
-using TTC.Shared.Handlers;
+using TTT.Shared.Attributes;
+using TTT.Shared.Handlers;
 
 namespace TicTacServer.Extensions;
 

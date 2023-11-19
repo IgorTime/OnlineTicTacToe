@@ -1,6 +1,6 @@
 ﻿using LiteNetLib;
 using TicTacServer.Data;
-using TTC.Shared.Packets.ServerClient;
+using TTT.Shared.Packets.ServerClient;
 
 namespace TicTacServer.Game;
 
