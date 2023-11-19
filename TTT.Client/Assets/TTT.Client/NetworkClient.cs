@@ -3,9 +3,9 @@ using System.Net;
 using System.Net.Sockets;
 using LiteNetLib;
 using LiteNetLib.Utils;
+using TTT.Client.PacketHandlers;
 using TTT.Shared;
 using TTT.Shared.Extensions;
-using TTT.Shared.Handlers;
 using TTT.Shared.Registries;
 using UnityEngine;
 using VContainer.Unity;
@@ -19,6 +19,7 @@ namespace TTT.Client
         ITickable,
         IDisposable
     {
+        private readonly IPacketHandlerResolver packetHandlerResolver;
         private PacketHandlerRegistry handlerRegistry;
         private NetManager netManager;
         private NetPeer server;
@@ -26,6 +27,12 @@ namespace TTT.Client
 
         public bool IsConnected => server != null;
 
+        public NetworkClient(
+            IPacketHandlerResolver packetHandlerResolver)
+        {
+            this.packetHandlerResolver = packetHandlerResolver;
+        }
+        
         public void Start()
         {
             Init();
@@ -59,7 +66,7 @@ namespace TTT.Client
             DeliveryMethod deliveryMethod)
         {
             var packetType = (PacketType) reader.GetByte();
-            var handler = ResolveHandler(packetType);
+            var handler = packetHandlerResolver.Resolve(packetType);
             handler.Handle(reader, peer.Id);
             reader.Recycle();
         }
@@ -105,13 +112,6 @@ namespace TTT.Client
         public void Dispose()
         {
             netManager?.Stop();
-        }
-
-        private IPacketHandler ResolveHandler(PacketType packetType)
-        {
-            var type = handlerRegistry[packetType];
-            var handler = (IPacketHandler) Activator.CreateInstance(type);
-            return handler;
         }
 
         private void Init()
