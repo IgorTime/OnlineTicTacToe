@@ -24,7 +24,6 @@ namespace TTT.Client
         private NetPeer server;
         private NetDataWriter writer;
 
-        public static NetworkClient Instance { get; }
         public bool IsConnected => server != null;
 
         public void Start()

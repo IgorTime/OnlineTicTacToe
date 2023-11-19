@@ -5,6 +5,7 @@ using TTT.Shared.Packets.ServerClient;
 using TTT.Client.PacketHandlers;
 using UnityEngine;
 using UnityEngine.UI;
+using VContainer;
 
 namespace TTT.Client.Login
 {
@@ -25,7 +26,16 @@ namespace TTT.Client.Login
         [SerializeField] 
         private GameObject loginError;
 
-        private void Awake()
+        private INetworkClient networkClient;
+
+        [Inject]
+        public void Construct(
+            INetworkClient networkClient)
+        {
+            this.networkClient = networkClient;
+        }
+        
+        private void Start()
         {
             loginButton.onClick.AddListener(Login);
             sendButton.onClick.AddListener(Send);
@@ -48,9 +58,9 @@ namespace TTT.Client.Login
             loginButton.interactable = false;
             loginError.gameObject.SetActive(false);
         
-            NetworkClient.Instance.Connect();
+            networkClient.Connect();
 
-            while (!NetworkClient.Instance.IsConnected)
+            while (!networkClient.IsConnected)
             {
                 await Task.Yield();
             }
@@ -61,7 +71,7 @@ namespace TTT.Client.Login
                 Password = passwordInput.text,
             };
         
-            NetworkClient.Instance.SendServer(request);
+            networkClient.SendServer(request);
         }
 
         private void Send()
@@ -72,7 +82,7 @@ namespace TTT.Client.Login
                 Password = passwordInput.text,
             };
         
-            NetworkClient.Instance.SendServer(request);
+            networkClient.SendServer(request);
         }
     }
 }

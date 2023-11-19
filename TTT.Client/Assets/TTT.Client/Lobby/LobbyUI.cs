@@ -1,11 +1,11 @@
-using System;
 using TMPro;
+using TTT.Client.PacketHandlers;
 using TTT.Shared.Packets.ClientServer;
 using TTT.Shared.Packets.ServerClient;
-using TTT.Client.PacketHandlers;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using VContainer;
 
 namespace TTT.Client.Lobby
 {
@@ -13,56 +13,42 @@ namespace TTT.Client.Lobby
     {
         [SerializeField]
         private Transform topPlayersContainer;
-        
+
         [SerializeField]
         private PlayerRow topPlayerPrefab;
 
-        [SerializeField] 
+        [SerializeField]
         private TextMeshProUGUI onlinePlayersCount;
 
-        [SerializeField] 
+        [SerializeField]
         private RectTransform loadingPanel;
 
         [Header("Buttons")]
-        [SerializeField] 
+        [SerializeField]
         private Button logoutButton;
-        
-        [SerializeField] 
+
+        [SerializeField]
         private Button findOpponentButton;
-        
+
         [SerializeField]
         private Button cancelFindOpponentButton;
-        
+
+        private INetworkClient networkClient;
+
+        [Inject]
+        public void Construct(
+            INetworkClient networkClient)
+        {
+            this.networkClient = networkClient;
+        }
+
         private void Start()
         {
-            
             OnServerStatusRequestHandler.OnServerStatus += Refresh;
             RequestServerStatus();
             logoutButton.onClick.AddListener(OnLogoutButtonClicked);
             findOpponentButton.onClick.AddListener(OnFindOpponentButtonClicked);
             cancelFindOpponentButton.onClick.AddListener(OnCancelFindOpponentButtonClicked);
-        }
-
-        private void OnCancelFindOpponentButtonClicked()
-        {
-            findOpponentButton.gameObject.SetActive(true);
-            loadingPanel.gameObject.SetActive(false);
-            var msg = new NetCancelFindOpponentRequest();
-            NetworkClient.Instance.SendServer(msg);
-        }
-
-        private void OnFindOpponentButtonClicked()
-        {
-            findOpponentButton.gameObject.SetActive(false);
-            loadingPanel.gameObject.SetActive(true);
-            var msg = new NetFindOpponentRequest();
-            NetworkClient.Instance.SendServer(msg);
-        }
-
-        private void OnLogoutButtonClicked()
-        {
-            NetworkClient.Instance.Disconnect();
-            SceneManager.LoadScene("00_Main");
         }
 
         private void OnDestroy()
@@ -71,10 +57,32 @@ namespace TTT.Client.Lobby
             logoutButton.onClick.RemoveListener(OnLogoutButtonClicked);
         }
 
+        private void OnCancelFindOpponentButtonClicked()
+        {
+            findOpponentButton.gameObject.SetActive(true);
+            loadingPanel.gameObject.SetActive(false);
+            var msg = new NetCancelFindOpponentRequest();
+            networkClient.SendServer(msg);
+        }
+
+        private void OnFindOpponentButtonClicked()
+        {
+            findOpponentButton.gameObject.SetActive(false);
+            loadingPanel.gameObject.SetActive(true);
+            var msg = new NetFindOpponentRequest();
+            networkClient.SendServer(msg);
+        }
+
+        private void OnLogoutButtonClicked()
+        {
+            networkClient.Disconnect();
+            SceneManager.LoadScene("00_Main");
+        }
+
         private void RequestServerStatus()
         {
             var msg = new NetServerStatusRequest();
-            NetworkClient.Instance.SendServer(msg);
+            networkClient.SendServer(msg);
         }
 
         private void Refresh(NetOnServerStatus message)
@@ -86,7 +94,7 @@ namespace TTT.Client.Lobby
 
         private void CreateTopPlayers(PlayerNetDto[] topPlayers)
         {
-            for (int i = 0; i < topPlayers.Length; i++)
+            for (var i = 0; i < topPlayers.Length; i++)
             {
                 var player = topPlayers[i];
                 var playerUI = Instantiate(topPlayerPrefab, topPlayersContainer);
