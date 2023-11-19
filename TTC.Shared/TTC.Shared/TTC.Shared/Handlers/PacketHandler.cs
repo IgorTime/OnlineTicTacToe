@@ -12,6 +12,6 @@ namespace TTC.Shared.Handlers
             Handle(packet, connectionId);
         }
 
-        protected abstract void Handle(T packet, int connectionId);
+        protected abstract void Handle(T message, int connectionId);
     }
 }
