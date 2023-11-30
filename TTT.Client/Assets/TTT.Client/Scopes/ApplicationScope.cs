@@ -1,6 +1,7 @@
 ﻿using TTT.Client.Gameplay;
 using TTT.Client.PacketHandlers;
 using TTT.Client.Services;
+using TTT.Client.User;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -20,6 +21,7 @@ namespace TTT.Client.Scopes
             builder.Register<ISceneLoader, SceneLoader>(Lifetime.Singleton);
             builder.Register<IPacketHandlerResolver, PacketHandlerResolver>(Lifetime.Singleton);
             builder.Register<IGameManager, GameManager>(Lifetime.Singleton);
+            builder.Register<IUserService, UserService>(Lifetime.Singleton);
 
             builder.RegisterBuildCallback(container =>
             {

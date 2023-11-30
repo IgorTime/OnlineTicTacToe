@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using TMPro;
 using TTT.Client.PacketHandlers;
+using TTT.Client.User;
 using TTT.Shared.Packets.ClientServer;
 using TTT.Shared.Packets.ServerClient;
 using UnityEngine;
@@ -21,24 +22,23 @@ namespace TTT.Client.Login
         private Button loginButton;
 
         [SerializeField]
-        private Button sendButton;
-
-        [SerializeField]
         private GameObject loginError;
 
         private INetworkClient networkClient;
+        private IUserService userService;
 
         [Inject]
         public void Construct(
-            INetworkClient networkClient)
+            INetworkClient networkClient,
+            IUserService userService)
         {
             this.networkClient = networkClient;
+            this.userService = userService;
         }
 
         private void Start()
         {
             loginButton.onClick.AddListener(Login);
-            sendButton.onClick.AddListener(Send);
             OnAuthFailHandler.OnAuthFail += OnAuthFail;
         }
 
@@ -72,17 +72,7 @@ namespace TTT.Client.Login
             };
 
             networkClient.SendServer(request);
-        }
-
-        private void Send()
-        {
-            var request = new NetAuthRequest
-            {
-                Username = usernameInput.text,
-                Password = passwordInput.text,
-            };
-
-            networkClient.SendServer(request);
+            userService.RegisterUser(request.Username);
         }
     }
 }

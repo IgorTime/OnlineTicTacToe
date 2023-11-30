@@ -1,5 +1,4 @@
-﻿using System;
-using TTT.Client.Gameplay;
+﻿using TTT.Client.Gameplay;
 using UnityEngine;
 using VContainer;
 
@@ -10,9 +9,12 @@ namespace TTT.Client.Game
         [Header("Header:")]
         [SerializeField]
         private UserView xUserView;
-        
+
         [SerializeField]
         private UserView oUserView;
+        
+        [SerializeField]
+        private TurnUI turnUI;
 
         private IGameManager gameManager;
 
@@ -25,6 +27,7 @@ namespace TTT.Client.Game
         private void Start()
         {
             InitHeader();
+            turnUI.SetTurn(gameManager.IsMyTurn);
         }
 
         private void InitHeader()

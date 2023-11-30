@@ -36,8 +36,7 @@ namespace TTT.Client.Lobby
         private INetworkClient networkClient;
 
         [Inject]
-        public void Construct(
-            INetworkClient networkClient)
+        public void Construct(INetworkClient networkClient)
         {
             this.networkClient = networkClient;
         }
