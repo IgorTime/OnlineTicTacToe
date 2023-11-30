@@ -14,7 +14,7 @@ namespace TTT.Client.Gameplay
         
         public Game ActiveGame { get; private set; }
 
-        public bool InputsEnable { get; private set; }
+        public bool InputEnabled { get; set; }
 
         public bool IsMyTurn
         {
@@ -50,7 +50,7 @@ namespace TTT.Client.Gameplay
             MyMark = MyUsername == xUser ? MarkType.X : MarkType.O;
             OpponentMark = MyMark == MarkType.X ? MarkType.O : MarkType.X;
             
-            InputsEnable = true;
+            InputEnabled = true;
         }
     }
 }

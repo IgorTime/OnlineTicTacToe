@@ -11,7 +11,7 @@ namespace TTT.Client.Gameplay
         public MarkType OpponentMark { get; }
         
         Game ActiveGame { get; }
-        bool InputsEnable { get; }
+        bool InputEnabled { get; set; }
         bool IsMyTurn { get; }
         void RegisterGame(Guid gameId, string xUser, string oUser);
     }

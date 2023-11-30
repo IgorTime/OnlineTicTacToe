@@ -146,8 +146,9 @@ GameObject:
   - component: {fileID: 6464019808411839457}
   - component: {fileID: 9028536375109722567}
   - component: {fileID: 517504869520793096}
+  - component: {fileID: 7499869326185515811}
   m_Layer: 5
-  m_Name: GameFieldButton
+  m_Name: BoardCell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -197,8 +198,8 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_RaycastPadding: {x: 10, y: 10, z: 10, w: 10}
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -256,6 +257,21 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &7499869326185515811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8000215714985199165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 618cbd5e649a4c02bd8f33ffa473c89f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  xMark: {fileID: 9103275028994443260}
+  oMark: {fileID: 208076501225044397}
+  button: {fileID: 517504869520793096}
 --- !u!1 &9103275028994443260
 GameObject:
   m_ObjectHideFlags: 0
