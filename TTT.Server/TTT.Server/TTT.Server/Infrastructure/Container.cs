@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using TTT.Server.Extensions;
 using TTT.Server.Data;
+using TTT.Server.Extensions;
 using TTT.Server.Game;
 using TTT.Server.Matchmaking;
 using TTT.Shared.Registries;

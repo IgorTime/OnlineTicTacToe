@@ -20,6 +20,7 @@
         OnServerStatus = 102,
         OnFindOpponent = 103,
         OnStartGame = 104,
+        OnMarkCell = 105,
 
         #endregion
     }
