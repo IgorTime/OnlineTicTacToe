@@ -1,4 +1,5 @@
-﻿using TTT.Client.PacketHandlers;
+﻿using TTT.Client.Gameplay;
+using TTT.Client.PacketHandlers;
 using TTT.Client.Services;
 using UnityEngine;
 using VContainer;
@@ -18,6 +19,7 @@ namespace TTT.Client.Scopes
             builder.RegisterEntryPoint<NetworkClient>().As<INetworkClient>();
             builder.Register<ISceneLoader, SceneLoader>(Lifetime.Singleton);
             builder.Register<IPacketHandlerResolver, PacketHandlerResolver>(Lifetime.Singleton);
+            builder.Register<IGameManager, GameManager>(Lifetime.Singleton);
 
             builder.RegisterBuildCallback(container =>
             {
