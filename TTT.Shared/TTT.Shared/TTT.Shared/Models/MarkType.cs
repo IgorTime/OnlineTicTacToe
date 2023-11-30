@@ -1,6 +1,6 @@
 namespace TTT.Shared.Models
 {
-    public enum MarkType
+    public enum MarkType : byte
     {
         None = 0,
         X = 1,

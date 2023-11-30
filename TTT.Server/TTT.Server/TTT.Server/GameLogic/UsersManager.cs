@@ -75,6 +75,11 @@ public class UsersManager
 
     public ServerConnection GetConnection(int peerId) => connetions[peerId];
 
+    public ServerConnection GetConnection(string userId)
+    {
+        return connetions.FirstOrDefault(x => x.Value.User.Id == userId).Value;
+    }
+
     public int[] GetOtherConnectionIds(int excludeConnectionId)
     {
         return connetions.Keys

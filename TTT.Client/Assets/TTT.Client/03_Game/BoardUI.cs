@@ -1,4 +1,5 @@
 ﻿using TTT.Client.Gameplay;
+using TTT.Shared.Packets.ClientServer;
 using UnityEngine;
 using VContainer;
 
@@ -12,11 +13,15 @@ namespace TTT.Client.Game
         private CellView[] cells;
 
         private IGameManager gameManager;
+        private INetworkClient networkClient;
 
         [Inject]
-        public void Construct(IGameManager gameManager)
+        public void Construct(
+            IGameManager gameManager,
+            INetworkClient networkClient)
         {
             this.gameManager = gameManager;
+            this.networkClient = networkClient;
         }
         
         private void Start()
@@ -49,6 +54,12 @@ namespace TTT.Client.Game
             {
                 Debug.Log($"Cell {cellIndex} clicked");
                 gameManager.InputEnabled = false;
+
+                var msg = new NetMarkCellRequest()
+                {
+                    Index = (byte)cellIndex
+                };
+                networkClient.SendServer(msg);
             }
         }
 
