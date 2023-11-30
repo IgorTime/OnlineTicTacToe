@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Logging;
 using TTT.Server.Data;
 using TTT.Server.Extensions;
-using TTT.Server.Game;
+using TTT.Server.GameLogic;
 using TTT.Server.Matchmaking;
 using TTT.Shared.Registries;
 

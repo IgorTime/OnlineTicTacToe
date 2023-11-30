@@ -1,4 +1,4 @@
-﻿using TTT.Server.Game;
+﻿using TTT.Server.GameLogic;
 using TTT.Server.Matchmaking;
 using TTT.Shared;
 using TTT.Shared.Attributes;

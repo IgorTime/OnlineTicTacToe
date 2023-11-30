@@ -1,4 +1,4 @@
-using TTT.Server.Game;
+using TTT.Server.GameLogic;
 
 namespace TTT.Server.Matchmaking;
 

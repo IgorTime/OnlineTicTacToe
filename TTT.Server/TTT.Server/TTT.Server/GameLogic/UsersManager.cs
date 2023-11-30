@@ -2,7 +2,7 @@
 using TTT.Server.Data;
 using TTT.Shared.Packets.ServerClient;
 
-namespace TTT.Server.Game;
+namespace TTT.Server.GameLogic;
 
 public class UsersManager
 {

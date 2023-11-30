@@ -4,7 +4,7 @@ using LiteNetLib;
 using LiteNetLib.Utils;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using TTT.Server.Game;
+using TTT.Server.GameLogic;
 using TTT.Shared;
 using TTT.Shared.Extensions;
 using TTT.Shared.Handlers;

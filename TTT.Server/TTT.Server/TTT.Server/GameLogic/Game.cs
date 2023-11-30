@@ -1,4 +1,4 @@
-namespace TTT.Server.Game;
+namespace TTT.Server.GameLogic;
 
 public class Game
 {

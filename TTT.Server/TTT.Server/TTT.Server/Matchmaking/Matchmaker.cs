@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
-using TTT.Server.Game;
+using TTT.Server.GameLogic;
 using TTT.Shared.Packets.ServerClient;
 
 namespace TTT.Server.Matchmaking;

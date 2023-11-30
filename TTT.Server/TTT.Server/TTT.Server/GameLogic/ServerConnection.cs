@@ -1,7 +1,7 @@
 using LiteNetLib;
 using TTT.Server.Data;
 
-namespace TTT.Server.Game;
+namespace TTT.Server.GameLogic;
 
 public class ServerConnection
 {

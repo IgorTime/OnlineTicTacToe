@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using TTT.Server.Data;
-using TTT.Server.Game;
+using TTT.Server.GameLogic;
 using TTT.Shared;
 using TTT.Shared.Attributes;
 using TTT.Shared.Handlers;
