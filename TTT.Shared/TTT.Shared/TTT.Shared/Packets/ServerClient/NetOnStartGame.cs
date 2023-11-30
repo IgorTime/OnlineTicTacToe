@@ -10,7 +10,7 @@ namespace TTT.Shared.Packets.ServerClient
         public string XUser { get; set; }
         public string OUser { get; set; }
         public Guid GameId { get; set; }
-        
+
         public void Serialize(NetDataWriter writer)
         {
             writer.Put(XUser);

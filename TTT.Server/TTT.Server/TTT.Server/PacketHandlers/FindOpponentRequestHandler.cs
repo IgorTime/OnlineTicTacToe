@@ -20,7 +20,7 @@ public class FindOpponentRequestHandler : PacketHandler<NetFindOpponentRequest>
         this.usersManager = usersManager;
         this.matchmaker = matchmaker;
     }
-    
+
     protected override void Handle(NetFindOpponentRequest packet, int connectionId)
     {
         var connection = usersManager.GetConnection(connectionId);

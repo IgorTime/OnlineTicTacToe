@@ -20,7 +20,7 @@ public class Matchmaker
         this.gamesManager = gamesManager;
         this.server = server;
     }
-    
+
     public void RegisterPlayer(ServerConnection connection)
     {
         if (pool.Any(x => x.Connection.User.Id == connection.User.Id))
@@ -28,13 +28,13 @@ public class Matchmaker
             logger.LogWarning($"{connection.User.Id} is already registered. Ignoring...");
             return;
         }
-        
+
         pool.Add(new MatchmakingRequest
         {
             Connection = connection,
             SearchStartedAt = DateTime.UtcNow,
         });
-        
+
         logger.LogInformation($"{connection.User.Id} registered for matchmaking");
 
         DoMatchmaking();
@@ -62,7 +62,7 @@ public class Matchmaker
             {
                 continue;
             }
-            
+
             match.MatchFound = true;
             request.MatchFound = true;
             matchedPlayers.Add(match);
@@ -74,7 +74,7 @@ public class Matchmaker
             request.Connection.GameId = gameId;
             match.Connection.GameId = gameId;
 
-            var msg = new NetOnStartGame()
+            var msg = new NetOnStartGame
             {
                 XUser = xUser,
                 OUser = oUser,
@@ -83,7 +83,7 @@ public class Matchmaker
 
             server.SendClient(request.Connection.ConnectionId, msg);
             server.SendClient(match.Connection.ConnectionId, msg);
-            
+
             logger.LogInformation($"Match found: {xUser}(X) vs {oUser}(O)");
         }
 

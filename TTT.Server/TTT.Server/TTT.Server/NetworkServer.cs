@@ -82,7 +82,7 @@ public class NetworkServer : INetEventListener
         }
         catch (Exception ex)
         {
-            logger.LogError(ex, $"Error while handling packet of type {(PacketType)packetType}");
+            logger.LogError(ex, $"Error while handling packet of type {(PacketType) packetType}");
         }
     }
 

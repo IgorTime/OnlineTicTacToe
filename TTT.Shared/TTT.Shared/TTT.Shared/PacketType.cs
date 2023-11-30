@@ -9,6 +9,7 @@
         ServerStatusRequest = 2,
         FindOpponentRequest = 3,
         CancelFindOpponentRequest = 4,
+        MarkCellRequest = 5,
 
         #endregion
 
@@ -21,6 +22,5 @@
         OnStartGame = 104,
 
         #endregion
-
     }
 }

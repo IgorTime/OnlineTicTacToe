@@ -5,17 +5,17 @@ namespace TTT.Server;
 public static class NetworkServerExtensions
 {
     public static void NotifyOtherPlayers(
-        this NetworkServer server, 
+        this NetworkServer server,
         ushort totalCount,
         PlayerNetDto[] topPlayers,
         int[] otherIds)
     {
-        var responseMessage = new NetOnServerStatus()
+        var responseMessage = new NetOnServerStatus
         {
             PlayersCount = totalCount,
             TopPlayers = topPlayers,
         };
-        
+
         foreach (var id in otherIds)
         {
             server.SendClient(id, responseMessage);
