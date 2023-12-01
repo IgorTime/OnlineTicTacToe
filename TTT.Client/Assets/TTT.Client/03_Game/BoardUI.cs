@@ -2,6 +2,7 @@
 using MessagePipe;
 using TTT.Client.Gameplay;
 using TTT.Client.LocalMessages;
+using TTT.Shared.Models;
 using TTT.Shared.Packets.ClientServer;
 using UnityEngine;
 using VContainer;
@@ -14,6 +15,9 @@ namespace TTT.Client.Game
 
         [SerializeField]
         private CellView[] cells;
+        
+        [SerializeField]
+        private WinLineUI winLineUI;
 
         private IGameManager gameManager;
         private INetworkClient networkClient;
@@ -49,6 +53,8 @@ namespace TTT.Client.Game
                 var column = i % BOARD_SIZE;
                 cells[i].Init(i, row, column, OnCellClicked);
             }
+            
+            winLineUI.Reset();
         }
 
         private void OnCellMarked(OnCellMarked message)
@@ -57,6 +63,11 @@ namespace TTT.Client.Game
                 ? gameManager.MyMark
                 : gameManager.OpponentMark;
             cells[message.Index].Mark(markType);
+
+            if (message.Outcome == MarkOutcome.Win)
+            {
+                winLineUI.SetLine(message.WinLine, withAnimation: true);
+            }
         }
 
         private void OnCellClicked(int cellIndex)

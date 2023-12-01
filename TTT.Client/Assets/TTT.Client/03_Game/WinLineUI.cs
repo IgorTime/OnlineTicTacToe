@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using DG.Tweening;
 using TriInspector;
 using TTT.Shared.Models;
 using UnityEngine;
@@ -17,15 +18,21 @@ namespace TTT.Client.Game
 
         [SerializeField]
         private RectTransform line;
-        
+
         [SerializeField]
         private LinePosition[] linePositions = Array.Empty<LinePosition>();
-        
+
+        [Header("Animation:")]
+        [SerializeField]
+        private float animationDuration = 0.2f;
+
+        [SerializeField]
+        private Ease animationEase = Ease.Linear;
+
         private Dictionary<byte, RectTransform> linePositionsByType;
 
         public void OnBeforeSerialize()
         {
-            
         }
 
         public void OnAfterDeserialize()
@@ -33,20 +40,35 @@ namespace TTT.Client.Game
             linePositionsByType = new Dictionary<byte, RectTransform>();
             foreach (var linePosition in linePositions)
             {
-                linePositionsByType[(byte)linePosition.WinLineType] = linePosition.position;
+                linePositionsByType[(byte) linePosition.WinLineType] = linePosition.position;
             }
         }
-        
+
         [Button]
-        public void SetLine(WinLineType winLineType)
+        public void SetLine(WinLineType winLineType, bool withAnimation = false)
         {
-            if (!linePositionsByType.TryGetValue((byte)winLineType, out var linePosition))
+            line.gameObject.SetActive(true);
+
+            if (!linePositionsByType.TryGetValue((byte) winLineType, out var linePosition))
             {
                 Debug.LogError($"No line position for {winLineType}");
                 return;
             }
-            
+
             line.SetPositionAndRotation(linePosition.position, linePosition.rotation);
+
+            if (withAnimation)
+            {
+                line.localScale = Vector3.zero;
+                line.DOScale(1f, animationDuration)
+                    .SetEase(animationEase)
+                    .SetLink(gameObject);
+            }
+        }
+
+        public void Reset()
+        {
+            line.gameObject.SetActive(false);
         }
     }
 }
