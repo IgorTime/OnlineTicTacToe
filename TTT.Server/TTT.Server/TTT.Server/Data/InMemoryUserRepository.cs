@@ -2,47 +2,27 @@
 
 public class InMemoryUserRepository : IUserRepository
 {
-    private readonly List<User> users;
-
-    public InMemoryUserRepository()
-    {
-        users = new List<User>
-        {
-            // new()
-            // {
-            //     Id = "User1",
-            //     Password = "Pass1",
-            //     IsOnline = true,
-            //     Score = 10,
-            // },
-            // new()
-            // {
-            //     Id = "User2",
-            //     Password = "Pass2",
-            //     IsOnline = true,
-            //     Score = 35,
-            // },
-        };
-    }
+    private readonly Dictionary<string, User> users = new();
 
     public void Update(User entity)
     {
-        var index = users.FindIndex(x => x.Id == entity.Id);
-        users[index] = entity;
+        users[entity.Id] = entity;
     }
 
-    public void Add(User entity) => users.Add(entity);
+    public void Add(User entity)
+    {
+        users[entity.Id] = entity;
+    }
 
-    public User Get(string id) => users.FirstOrDefault(x => x.Id == id);
+    public User Get(string id) => users[id];
 
-    public IQueryable<User> GetQuery() => users.AsQueryable();
+    public IQueryable<User> GetQuery() => users.Values.AsQueryable();
 
-    public ushort GetTotalCount() => (ushort) users.Count(x => x.IsOnline);
+    public ushort GetTotalCount() => (ushort) users.Values.Count(x => x.IsOnline);
 
     public void Delete(string id)
     {
-        var user = users.FirstOrDefault(x => x.Id == id);
-        users.Remove(user);
+        users.Remove(id);
     }
 
     public void SetOnline(string id) => Get(id).IsOnline = true;
