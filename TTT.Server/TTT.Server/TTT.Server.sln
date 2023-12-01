@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TTT.Server", "TTT.Server\TT
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TTT.Shared", "..\..\TTT.Shared\TTT.Shared\TTT.Shared\TTT.Shared.csproj", "{3524CD25-BB54-4170-804B-79B0D9EC9D04}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TTT.Tests", "TTT.Tests\TTT.Tests.csproj", "{531603C0-7F62-4D59-AFDB-0BCDEC009FB8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{3524CD25-BB54-4170-804B-79B0D9EC9D04}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3524CD25-BB54-4170-804B-79B0D9EC9D04}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3524CD25-BB54-4170-804B-79B0D9EC9D04}.Release|Any CPU.Build.0 = Release|Any CPU
+		{531603C0-7F62-4D59-AFDB-0BCDEC009FB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{531603C0-7F62-4D59-AFDB-0BCDEC009FB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{531603C0-7F62-4D59-AFDB-0BCDEC009FB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{531603C0-7F62-4D59-AFDB-0BCDEC009FB8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
