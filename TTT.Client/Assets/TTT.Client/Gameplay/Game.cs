@@ -10,5 +10,12 @@ namespace TTT.Client.Gameplay
         public string CurrentUser { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
+
+        public void SwitchCurrentPlayer()
+        {
+            CurrentUser = GetOpponent(CurrentUser);
+        }
+
+        private string GetOpponent(string currentUser) => XUser == currentUser ? OUser : XUser;
     }
 }

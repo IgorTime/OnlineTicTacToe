@@ -11,7 +11,7 @@ namespace TTT.Client.Gameplay
         public string OpponentUsername { get; private set; }
         public MarkType MyMark { get; private set; }
         public MarkType OpponentMark { get; private set; }
-        
+
         public Game ActiveGame { get; private set; }
 
         public bool InputEnabled { get; set; }
@@ -24,10 +24,12 @@ namespace TTT.Client.Gameplay
                 {
                     return false;
                 }
-                
+
                 return ActiveGame.CurrentUser == MyUsername;
             }
         }
+
+        public string CurrentUser { get; set; }
 
         public GameManager(IUserService userService)
         {
@@ -49,7 +51,7 @@ namespace TTT.Client.Gameplay
             OpponentUsername = MyUsername == xUser ? oUser : xUser;
             MyMark = MyUsername == xUser ? MarkType.X : MarkType.O;
             OpponentMark = MyMark == MarkType.X ? MarkType.O : MarkType.X;
-            
+
             InputEnabled = true;
         }
     }

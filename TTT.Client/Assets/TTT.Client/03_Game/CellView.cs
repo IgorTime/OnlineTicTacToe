@@ -1,4 +1,5 @@
 ﻿using System;
+using DG.Tweening;
 using TTT.Shared.Models;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,6 +8,9 @@ namespace TTT.Client.Game
 {
     public class CellView : MonoBehaviour
     {
+        [SerializeField]
+        private RectTransform marksRoot;
+
         [SerializeField]
         private GameObject xMark;
 
@@ -40,6 +44,14 @@ namespace TTT.Client.Game
             Column = column;
             clickCallback = onCellClicked;
             SetMark(MarkType.None);
+        }
+
+        public void Mark(MarkType markType)
+        {
+            SetMark(markType);
+
+            marksRoot.localScale = Vector3.zero;
+            marksRoot.DOScale(1f, 0.2f).SetEase(Ease.OutBack).SetLink(gameObject);
         }
 
         private void OnCellClicked()

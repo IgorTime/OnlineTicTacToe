@@ -1,5 +1,7 @@
 using Microsoft.Extensions.Logging;
 using TTT.Server.GameLogic;
+using TTT.Shared;
+using TTT.Shared.Attributes;
 using TTT.Shared.Handlers;
 using TTT.Shared.Models;
 using TTT.Shared.Packets.ClientServer;
@@ -7,6 +9,7 @@ using TTT.Shared.Packets.ServerClient;
 
 namespace TTT.Server.PacketHandlers;
 
+[HandlerRegister(PacketType.MarkCellRequest)]
 public class MarkCellRequestHandler : PacketHandler<NetMarkCellRequest>
 {
     private readonly UsersManager usersManager;

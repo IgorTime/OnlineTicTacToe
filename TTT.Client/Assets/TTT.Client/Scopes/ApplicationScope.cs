@@ -1,4 +1,6 @@
-﻿using TTT.Client.Gameplay;
+﻿using MessagePipe;
+using TTT.Client.Gameplay;
+using TTT.Client.LocalMessages;
 using TTT.Client.PacketHandlers;
 using TTT.Client.Services;
 using TTT.Client.User;
@@ -23,11 +25,26 @@ namespace TTT.Client.Scopes
             builder.Register<IGameManager, GameManager>(Lifetime.Singleton);
             builder.Register<IUserService, UserService>(Lifetime.Singleton);
 
+            var options = RegisterMessagePipe(builder);
+            RegisterMessages(builder, options);
+
             builder.RegisterBuildCallback(container =>
             {
                 var sceneLoader = container.Resolve<ISceneLoader>();
                 sceneLoader.LoadLoginScene();
             });
+        }
+
+        private static MessagePipeOptions RegisterMessagePipe(IContainerBuilder builder)
+        {
+            var options = builder.RegisterMessagePipe();
+            builder.RegisterBuildCallback(c => GlobalMessagePipe.SetProvider(c.AsServiceProvider()));
+            return options;
+        }
+
+        private void RegisterMessages(IContainerBuilder builder, MessagePipeOptions options)
+        {
+            builder.RegisterMessageBroker<OnCellMarked>(options);
         }
     }
 }

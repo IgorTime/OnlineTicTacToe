@@ -1,4 +1,7 @@
-﻿using TTT.Client.Gameplay;
+﻿using System;
+using MessagePipe;
+using TTT.Client.Gameplay;
+using TTT.Client.LocalMessages;
 using TTT.Shared.Packets.ClientServer;
 using UnityEngine;
 using VContainer;
@@ -8,25 +11,34 @@ namespace TTT.Client.Game
     public class BoardUI : MonoBehaviour
     {
         public const byte BOARD_SIZE = 3;
-        
+
         [SerializeField]
         private CellView[] cells;
 
         private IGameManager gameManager;
         private INetworkClient networkClient;
+        private IDisposable unSubscriber;
 
         [Inject]
         public void Construct(
             IGameManager gameManager,
-            INetworkClient networkClient)
+            INetworkClient networkClient,
+            ISubscriber<OnCellMarked> onCellMarked)
         {
             this.gameManager = gameManager;
             this.networkClient = networkClient;
+
+            unSubscriber = onCellMarked.Subscribe(OnCellMarked);
         }
-        
+
         private void Start()
         {
             ResetBoard();
+        }
+
+        private void OnDestroy()
+        {
+            unSubscriber?.Dispose();
         }
 
         public void ResetBoard()
@@ -37,6 +49,14 @@ namespace TTT.Client.Game
                 var column = i % BOARD_SIZE;
                 cells[i].Init(i, row, column, OnCellClicked);
             }
+        }
+
+        private void OnCellMarked(OnCellMarked message)
+        {
+            var markType = message.Actor == gameManager.MyUsername
+                ? gameManager.MyMark
+                : gameManager.OpponentMark;
+            cells[message.Index].Mark(markType);
         }
 
         private void OnCellClicked(int cellIndex)
@@ -55,10 +75,11 @@ namespace TTT.Client.Game
                 Debug.Log($"Cell {cellIndex} clicked");
                 gameManager.InputEnabled = false;
 
-                var msg = new NetMarkCellRequest()
+                var msg = new NetMarkCellRequest
                 {
-                    Index = (byte)cellIndex
+                    Index = (byte) cellIndex,
                 };
+
                 networkClient.SendServer(msg);
             }
         }
