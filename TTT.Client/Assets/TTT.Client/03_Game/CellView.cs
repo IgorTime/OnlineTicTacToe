@@ -1,5 +1,6 @@
 ﻿using System;
 using DG.Tweening;
+using TriInspector;
 using TTT.Shared.Models;
 using UnityEngine;
 using UnityEngine.UI;
@@ -22,8 +23,16 @@ namespace TTT.Client.Game
 
         private Action<int> clickCallback;
 
+        [ShowInInspector]
+        [ReadOnly]
         public int Index { get; private set; }
+        
+        [ShowInInspector]
+        [ReadOnly]
         public int Row { get; private set; }
+        
+        [ShowInInspector]
+        [ReadOnly]
         public int Column { get; private set; }
 
         private void Start()

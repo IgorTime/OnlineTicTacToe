@@ -6,7 +6,7 @@ namespace TTT.Server.Utilities;
 
 public static class GridExtensions
 {
-    public static (int, int) GetCoordinates(int index, int gridSize) => (index / gridSize, index % gridSize);
+    public static (int, int) GetCoordinates(int index, int gridSize) => (index % gridSize, index / gridSize);
 
     public static (bool isWin, WinLineType winLineType) CheckWin(this MarkType[,] grid, int gridSize)
     {

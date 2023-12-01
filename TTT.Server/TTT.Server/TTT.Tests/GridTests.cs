@@ -13,9 +13,9 @@ public class Tests
         var grid = new Grid(3);
         
         // Act
-        grid.MarkCell(0, 0, MarkType.X);
-        grid.MarkCell(1, 0, MarkType.X);
-        grid.MarkCell(2, 0, MarkType.X);
+        grid.MarkCell(0, MarkType.X);
+        grid.MarkCell(1, MarkType.X);
+        grid.MarkCell(2, MarkType.X);
         var (isWin, winLineType) = grid.CheckWin();
         
         // Assert
@@ -30,9 +30,9 @@ public class Tests
         var grid = new Grid(3);
         
         // Act
-        grid.MarkCell(0, 1, MarkType.X);
-        grid.MarkCell(1, 1, MarkType.X);
-        grid.MarkCell(2, 1, MarkType.X);
+        grid.MarkCell(3, MarkType.X);
+        grid.MarkCell(4, MarkType.X);
+        grid.MarkCell(5, MarkType.X);
         var (isWin, winLineType) = grid.CheckWin();
         
         // Assert
@@ -47,9 +47,9 @@ public class Tests
         var grid = new Grid(3);
         
         // Act
-        grid.MarkCell(0, 2, MarkType.X);
-        grid.MarkCell(1, 2, MarkType.X);
-        grid.MarkCell(2, 2, MarkType.X);
+        grid.MarkCell(6, MarkType.X);
+        grid.MarkCell(7, MarkType.X);
+        grid.MarkCell(8, MarkType.X);
         var (isWin, winLineType) = grid.CheckWin();
         
         // Assert

@@ -48,7 +48,14 @@ namespace TTT.Client.Game
             if (message.Outcome != MarkOutcome.None)
             {
                 var isDraw = message.Outcome == MarkOutcome.Draw;
-                Debug.Log("Game over! " + (isDraw ? "Draw!" : message.Actor + " won!"));
+                if (isDraw)
+                {
+                    Debug.Log("Game over! Draw!");
+                }
+                else
+                {
+                    Debug.Log("Game over! " + message.Actor + $" won! Line {message.WinLine.ToString()}");
+                }
                 return;
             }
 
