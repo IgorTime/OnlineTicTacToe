@@ -148,6 +148,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   yourTurnText: {fileID: 3637248973900484196}
   opponentTurnText: {fileID: 408907191449509190}
+  animationDuration: 0.2
+  animationEase: 27
+  delay: 0.3
 --- !u!1 &1971150208249628602
 GameObject:
   m_ObjectHideFlags: 0
@@ -1682,6 +1685,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6054622784045202566, guid: 3d5df06973d70244a90c09b075db8ee6, type: 3}
+      propertyPath: m_fontSize
+      value: 250
+      objectReference: {fileID: 0}
     - target: {fileID: 8000215714985199165, guid: 3d5df06973d70244a90c09b075db8ee6, type: 3}
       propertyPath: m_Name
       value: GameFieldButton (5)
@@ -1794,6 +1801,10 @@ PrefabInstance:
     - target: {fileID: 2911601756458716839, guid: 3d5df06973d70244a90c09b075db8ee6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6054622784045202566, guid: 3d5df06973d70244a90c09b075db8ee6, type: 3}
+      propertyPath: m_fontSize
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 8000215714985199165, guid: 3d5df06973d70244a90c09b075db8ee6, type: 3}
       propertyPath: m_Name
@@ -1908,6 +1919,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6054622784045202566, guid: 3d5df06973d70244a90c09b075db8ee6, type: 3}
+      propertyPath: m_fontSize
+      value: 250
+      objectReference: {fileID: 0}
     - target: {fileID: 8000215714985199165, guid: 3d5df06973d70244a90c09b075db8ee6, type: 3}
       propertyPath: m_Name
       value: GameFieldButton (1)
@@ -2021,6 +2036,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6054622784045202566, guid: 3d5df06973d70244a90c09b075db8ee6, type: 3}
+      propertyPath: m_fontSize
+      value: 250
+      objectReference: {fileID: 0}
     - target: {fileID: 8000215714985199165, guid: 3d5df06973d70244a90c09b075db8ee6, type: 3}
       propertyPath: m_Name
       value: GameFieldButton (6)
@@ -2133,6 +2152,10 @@ PrefabInstance:
     - target: {fileID: 2911601756458716839, guid: 3d5df06973d70244a90c09b075db8ee6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6054622784045202566, guid: 3d5df06973d70244a90c09b075db8ee6, type: 3}
+      propertyPath: m_fontSize
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 8000215714985199165, guid: 3d5df06973d70244a90c09b075db8ee6, type: 3}
       propertyPath: m_Name
@@ -2360,6 +2383,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6054622784045202566, guid: 3d5df06973d70244a90c09b075db8ee6, type: 3}
+      propertyPath: m_fontSize
+      value: 250
+      objectReference: {fileID: 0}
     - target: {fileID: 8000215714985199165, guid: 3d5df06973d70244a90c09b075db8ee6, type: 3}
       propertyPath: m_Name
       value: GameFieldButton (7)
@@ -2472,6 +2499,10 @@ PrefabInstance:
     - target: {fileID: 2911601756458716839, guid: 3d5df06973d70244a90c09b075db8ee6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6054622784045202566, guid: 3d5df06973d70244a90c09b075db8ee6, type: 3}
+      propertyPath: m_fontSize
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 8000215714985199165, guid: 3d5df06973d70244a90c09b075db8ee6, type: 3}
       propertyPath: m_Name
@@ -2586,6 +2617,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6054622784045202566, guid: 3d5df06973d70244a90c09b075db8ee6, type: 3}
+      propertyPath: m_fontSize
+      value: 250
+      objectReference: {fileID: 0}
     - target: {fileID: 8000215714985199165, guid: 3d5df06973d70244a90c09b075db8ee6, type: 3}
       propertyPath: m_Name
       value: GameFieldButton
@@ -2698,6 +2733,10 @@ PrefabInstance:
     - target: {fileID: 2911601756458716839, guid: 3d5df06973d70244a90c09b075db8ee6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6054622784045202566, guid: 3d5df06973d70244a90c09b075db8ee6, type: 3}
+      propertyPath: m_fontSize
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 8000215714985199165, guid: 3d5df06973d70244a90c09b075db8ee6, type: 3}
       propertyPath: m_Name
