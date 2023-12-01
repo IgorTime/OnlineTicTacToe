@@ -121,7 +121,7 @@ public static class GridExtensions
 
     private static bool CheckAntiDiagonal(this MarkType[,] grid, int gridSize)
     {
-        var type = grid[0, 0];
+        var type = grid[0, gridSize - 1];
         if (type == MarkType.None)
         {
             return false;
