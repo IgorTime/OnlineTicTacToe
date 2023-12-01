@@ -27,7 +27,11 @@ namespace TTT.Client.Game
         private float animationDuration = 0.2f;
 
         [SerializeField]
+        private float delay = 0.2f;
+        
+        [SerializeField]
         private Ease animationEase = Ease.Linear;
+        
 
         private Dictionary<byte, RectTransform> linePositionsByType;
 
@@ -62,6 +66,7 @@ namespace TTT.Client.Game
                 line.localScale = Vector3.zero;
                 line.DOScale(1f, animationDuration)
                     .SetEase(animationEase)
+                    .SetDelay(delay)
                     .SetLink(gameObject);
             }
         }
