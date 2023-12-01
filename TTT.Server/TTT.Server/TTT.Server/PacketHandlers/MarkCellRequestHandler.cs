@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Logging;
 using TTT.Server.GameLogic;
 using TTT.Shared.Handlers;
 using TTT.Shared.Models;
@@ -11,15 +12,18 @@ public class MarkCellRequestHandler : PacketHandler<NetMarkCellRequest>
     private readonly UsersManager usersManager;
     private readonly GamesManager gamesManager;
     private readonly NetworkServer networkServer;
+    private readonly ILogger<MarkCellRequestHandler> logger;
 
     public MarkCellRequestHandler(
         UsersManager usersManager,
         GamesManager gamesManager,
-        NetworkServer networkServer)
+        NetworkServer networkServer,
+        ILogger<MarkCellRequestHandler> logger) 
     {
         this.usersManager = usersManager;
         this.gamesManager = gamesManager;
         this.networkServer = networkServer;
+        this.logger = logger;
     }
 
     protected override void Handle(NetMarkCellRequest message, int connectionId)
@@ -44,6 +48,20 @@ public class MarkCellRequestHandler : PacketHandler<NetMarkCellRequest>
         
         networkServer.SendClient(connection.ConnectionId, response);
         networkServer.SendClient(opponentConnection.ConnectionId, response);
+        logger.LogInformation($"'{userId}' marked cell '{message.Index}' with outcome '{result.Outcome}'");
+
+        if (result.Outcome == MarkOutcome.None)
+        {
+            game.SwitchCurrentPlayer();
+            return;
+        }
+
+        if (result.Outcome == MarkOutcome.Win)
+        {
+            game.AddWin(userId);
+            usersManager.IncreaseScore(userId);
+            logger.LogInformation($"'{userId}' won the game! Increasing score and win counter.");
+        }
     }
 
     private static void ValidateAndThrow(byte cellIndex, string actor, Game game)

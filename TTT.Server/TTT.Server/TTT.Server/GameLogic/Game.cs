@@ -62,6 +62,24 @@ public class Game
 
     public string GetOpponent(string userId) => XUser == userId ? OUser : XUser;
 
+    public void SwitchCurrentPlayer()
+    {
+        CurrentUser = GetOpponent(CurrentUser);
+    }
+
+    public void AddWin(string userId)
+    {
+        var winnerType = GetPlayerType(userId);
+        if (winnerType == MarkType.X)
+        {
+            XWins++;
+        }
+        else
+        {
+            OWins++;
+        }
+    }
+
     private MarkType GetPlayerType(string userId) =>
         userId == XUser
             ? MarkType.X

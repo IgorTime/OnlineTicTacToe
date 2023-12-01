@@ -99,4 +99,11 @@ public class UsersManager
                               })
                              .ToArray();
     }
+
+    public void IncreaseScore(string userId)
+    {
+        var user = userRepository.Get(userId);
+        user.Score += 10;
+        userRepository.Update(user);
+    }
 }
