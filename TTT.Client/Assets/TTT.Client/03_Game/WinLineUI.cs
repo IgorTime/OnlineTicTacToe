@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using TriInspector;
 using TTT.Shared.Models;
 using UnityEngine;
 
@@ -14,6 +15,9 @@ namespace TTT.Client.Game
             public RectTransform position;
         }
 
+        [SerializeField]
+        private RectTransform line;
+        
         [SerializeField]
         private LinePosition[] linePositions = Array.Empty<LinePosition>();
         
@@ -31,6 +35,18 @@ namespace TTT.Client.Game
             {
                 linePositionsByType[(byte)linePosition.WinLineType] = linePosition.position;
             }
+        }
+        
+        [Button]
+        public void SetLine(WinLineType winLineType)
+        {
+            if (!linePositionsByType.TryGetValue((byte)winLineType, out var linePosition))
+            {
+                Debug.LogError($"No line position for {winLineType}");
+                return;
+            }
+            
+            line.SetPositionAndRotation(linePosition.position, linePosition.rotation);
         }
     }
 }
