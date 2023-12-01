@@ -14,7 +14,7 @@ public class InMemoryUserRepository : IUserRepository
         users[entity.Id] = entity;
     }
 
-    public User Get(string id) => users[id];
+    public bool TryGet(string id, out User entity) => users.TryGetValue(id, out entity);
 
     public IQueryable<User> GetQuery() => users.Values.AsQueryable();
 
@@ -25,7 +25,19 @@ public class InMemoryUserRepository : IUserRepository
         users.Remove(id);
     }
 
-    public void SetOnline(string id) => Get(id).IsOnline = true;
+    public void SetOnline(string id)
+    {
+        if (TryGet(id, out var user))
+        {
+            user.IsOnline = true;
+        }
+    }
 
-    public void SetOffline(string id) => Get(id).IsOnline = false;
+    public void SetOffline(string id)
+    {
+        if (TryGet(id, out var user))
+        {
+            user.IsOnline = false;
+        }
+    }
 }

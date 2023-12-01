@@ -4,7 +4,7 @@ public interface IRepository<T> where T : class
 {
     void Update(T entity);
     void Add(T entity);
-    T Get(string id);
+    bool TryGet(string id, out T entity);
     IQueryable<T> GetQuery();
     ushort GetTotalCount();
     void Delete(string id);

@@ -27,8 +27,7 @@ public class UsersManager
 
     public bool LoginOrRegister(int connectionId, string username, string password)
     {
-        var user = userRepository.Get(username);
-        if (user != null)
+        if (userRepository.TryGet(username, out var user))
         {
             if (user.Password != password)
             {
@@ -102,8 +101,10 @@ public class UsersManager
 
     public void IncreaseScore(string userId)
     {
-        var user = userRepository.Get(userId);
-        user.Score += 10;
-        userRepository.Update(user);
+        if (userRepository.TryGet(userId, out var user))
+        {
+            user.Score += 10;
+            userRepository.Update(user);
+        }
     }
 }
