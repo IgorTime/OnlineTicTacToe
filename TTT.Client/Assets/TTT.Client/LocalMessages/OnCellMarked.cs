@@ -7,9 +7,9 @@ namespace TTT.Client.LocalMessages
         public string Actor { get; }
         public byte Index { get; }
         public MarkOutcome Outcome { get; }
-        public WinLineType WinLine { get; }
+        public WinLine WinLine { get; }
 
-        public OnCellMarked(string actor, byte index, MarkOutcome outcome, WinLineType winLine)
+        public OnCellMarked(string actor, byte index, MarkOutcome outcome, WinLine winLine)
         {
             Actor = actor;
             Index = index;

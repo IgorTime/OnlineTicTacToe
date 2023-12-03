@@ -12,7 +12,7 @@ namespace TTT.Client.Game
         [Serializable]
         private class LinePosition
         {
-            public WinLineType WinLineType;
+            public WinLine WinLine;
             public RectTransform position;
         }
 
@@ -44,18 +44,18 @@ namespace TTT.Client.Game
             linePositionsByType = new Dictionary<byte, RectTransform>();
             foreach (var linePosition in linePositions)
             {
-                linePositionsByType[(byte) linePosition.WinLineType] = linePosition.position;
+                linePositionsByType[(byte) linePosition.WinLine] = linePosition.position;
             }
         }
 
         [Button]
-        public void SetLine(WinLineType winLineType, bool withAnimation = false)
+        public void SetLine(WinLine WinLine, bool withAnimation = false)
         {
             line.gameObject.SetActive(true);
 
-            if (!linePositionsByType.TryGetValue((byte) winLineType, out var linePosition))
+            if (!linePositionsByType.TryGetValue((byte) WinLine, out var linePosition))
             {
-                Debug.LogError($"No line position for {winLineType}");
+                Debug.LogError($"No line position for {WinLine}");
                 return;
             }
 

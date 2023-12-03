@@ -10,7 +10,7 @@ namespace TTT.Shared.Packets.ServerClient
         public string Actor { get; set; }
         public byte Index { get; set; }
         public MarkOutcome Outcome { get; set; }
-        public WinLineType WinLine { get; set; }
+        public WinLine WinLine { get; set; }
 
         public void Serialize(NetDataWriter writer)
         {
@@ -25,7 +25,7 @@ namespace TTT.Shared.Packets.ServerClient
             Actor = reader.GetString();
             Index = reader.GetByte();
             Outcome = (MarkOutcome) reader.GetByte();
-            WinLine = (WinLineType) reader.GetByte();
+            WinLine = (WinLine) reader.GetByte();
         }
     }
 }

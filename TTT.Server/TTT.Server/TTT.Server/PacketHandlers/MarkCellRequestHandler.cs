@@ -43,7 +43,7 @@ public class MarkCellRequestHandler : PacketHandler<NetMarkCellRequest>
             Actor = userId,
             Index = message.Index,
             Outcome = result.Outcome,
-            WinLine = result.WinLineType
+            WinLine = result.WinLine
         };
         
         var opponentId = game.GetOpponent(userId);

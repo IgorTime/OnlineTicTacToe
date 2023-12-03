@@ -4,9 +4,7 @@ namespace TTT.Server.GameLogic;
 
 public class Game
 {
-    private const int GRID_SIZE = 3;
-
-    private readonly Grid grid;
+    private readonly Grid3X3 grid3X3;
 
     public Guid Id { get; set; }
     public ushort Round { get; set; }
@@ -29,24 +27,24 @@ public class Game
         CurrentRoundStartTime = DateTime.UtcNow;
         Round = 1;
         CurrentUser = xUser;
-        grid = new Grid(GRID_SIZE);
+        grid3X3 = new Grid3X3();
     }
 
     public MarkResult MarkCell(byte cellIndex)
     {
         var playerType = GetPlayerType(CurrentUser);
-        grid.MarkCell(cellIndex, playerType);
-        var (isWin, winLineType) = grid.CheckWin();
+        grid3X3.MarkCell(cellIndex, playerType);
+        var (isWin, winLineType) = grid3X3.CheckWin();
 
         var result = new MarkResult();
         if (isWin)
         {
             result.Outcome = MarkOutcome.Win;
-            result.WinLineType = winLineType;
+            result.WinLine = winLineType;
         }
         else
         {
-            var draw = grid.CheckDraw();
+            var draw = grid3X3.CheckDraw();
             if (draw)
             {
                 result.Outcome = MarkOutcome.Draw;
@@ -56,7 +54,7 @@ public class Game
         return result;
     }
 
-    public MarkType GetCell(byte cellIndex) => grid.GetCell(cellIndex);
+    public MarkType GetCell(byte cellIndex) => grid3X3.GetCell(cellIndex);
 
     public string GetOpponent(string userId) => XUser == userId ? OUser : XUser;
 

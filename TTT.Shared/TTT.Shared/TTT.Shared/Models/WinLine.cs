@@ -1,6 +1,6 @@
 namespace TTT.Shared.Models
 {
-    public enum WinLineType : byte
+    public enum WinLine : byte
     {
         None = 0,
         Diagonal = 1,
