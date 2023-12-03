@@ -20,6 +20,7 @@ namespace TTT.Client.Game
         private RectTransform line;
 
         [SerializeField]
+        [TableList]
         private LinePosition[] linePositions = Array.Empty<LinePosition>();
 
         [Header("Animation:")]

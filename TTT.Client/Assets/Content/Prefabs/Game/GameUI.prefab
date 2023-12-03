@@ -1715,21 +1715,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   line: {fileID: 3806917654468757193}
   linePositions:
-  - WinLineType: 6
+  - WinLine: 6
     position: {fileID: 822911914229816552}
-  - WinLineType: 7
+  - WinLine: 7
     position: {fileID: 6402638887043781706}
-  - WinLineType: 8
+  - WinLine: 8
     position: {fileID: 8674462097875832979}
-  - WinLineType: 3
+  - WinLine: 3
     position: {fileID: 4350215296190832851}
-  - WinLineType: 4
+  - WinLine: 4
     position: {fileID: 2901676403684037875}
-  - WinLineType: 5
+  - WinLine: 5
     position: {fileID: 4884307032794681368}
-  - WinLineType: 1
+  - WinLine: 1
     position: {fileID: 8605263715756045537}
-  - WinLineType: 2
+  - WinLine: 2
     position: {fileID: 865594559252782519}
   animationDuration: 0.2
   delay: 0.2

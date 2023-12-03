@@ -52,6 +52,7 @@ public class MarkCellRequestHandler : PacketHandler<NetMarkCellRequest>
         networkServer.SendClient(connection.ConnectionId, response);
         networkServer.SendClient(opponentConnection.ConnectionId, response);
         logger.LogInformation($"'{userId}' marked cell '{message.Index}' with outcome '{result.Outcome}'");
+        logger.LogInformation($"Grid:\n{game.GetGridString()}");
 
         if (result.Outcome == MarkOutcome.None)
         {

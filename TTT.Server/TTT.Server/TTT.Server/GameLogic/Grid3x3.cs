@@ -26,7 +26,7 @@ public struct Grid3X3
         {DIAGONAL_BIT_MASK, WinLine.Diagonal},
         {ANTI_DIAGONAL_BIT_MASK, WinLine.AntiDiagonal},
     };
-
+    
     private readonly int gridSize;
     private short xBitMap;
     private short oBitMap;
@@ -98,4 +98,31 @@ public struct Grid3X3
         oBitMap.CompareBitMask(bitMask);
 
     private int GetIndex(in int x, in int y) => y * gridSize + x;
+
+    public override string ToString()
+    {
+        var result = StringBuilderInstance.Get();
+        
+        for (var y = 0; y < gridSize; y++)
+        {
+            for (var x = 0; x < gridSize; x++)
+            {
+                result.Append(GetCellString(x, y)).Append(' ');
+            }
+            
+            result.AppendLine();
+        }
+
+        return result.ToString();
+    }
+    
+    private string GetCellString(in int x, in int y)
+    {
+        return GetCell(x, y) switch
+        {
+            MarkType.X => "X",
+            MarkType.O => "O",
+            _ => "_",
+        };
+    }
 }

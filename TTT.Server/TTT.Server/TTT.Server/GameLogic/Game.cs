@@ -4,7 +4,7 @@ namespace TTT.Server.GameLogic;
 
 public class Game
 {
-    private readonly Grid3X3 grid3X3;
+    private Grid3X3 grid3X3;
 
     public Guid Id { get; set; }
     public ushort Round { get; set; }
@@ -53,6 +53,8 @@ public class Game
 
         return result;
     }
+    
+    public string GetGridString() => grid3X3.ToString();
 
     public MarkType GetCell(byte cellIndex) => grid3X3.GetCell(cellIndex);
 
