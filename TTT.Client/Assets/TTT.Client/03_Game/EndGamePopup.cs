@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using DG.Tweening;
+using TMPro;
 using TriInspector;
 using TTT.Client.Configs;
 using TTT.Client.Gameplay;
@@ -128,6 +129,11 @@ namespace TTT.Client.Game
         {
             content.gameObject.SetActive(true);
             background.gameObject.SetActive(true);
+
+            content.localScale = Vector3.one * 0.8f;
+            content.DOScale(1f, 0.2f)
+                   .SetEase(Ease.OutBack)
+                   .SetLink(gameObject);
         }
 
         private void InternalHide()
