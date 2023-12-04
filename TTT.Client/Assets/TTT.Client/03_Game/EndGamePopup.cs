@@ -48,6 +48,10 @@ namespace TTT.Client.Game
         [SerializeField]
         private TextMeshProUGUI drawText;
 
+        [Header("Middle text:")]
+        [SerializeField]
+        private RectTransform middleTextRoot;
+
         [SerializeField]
         private TextMeshProUGUI waitForOpponentText;
 
@@ -105,7 +109,7 @@ namespace TTT.Client.Game
             var winnerMark = isDraw ? MarkType.None : gameManager.ActiveGame.GetUserMark(winnerId);
             SetHeaderState(state, winnerMark);
             SetButtonsState(state);
-            SetTextState(state);
+            SetMiddleTextState(state);
             InternalShow();
         }
 
@@ -116,11 +120,16 @@ namespace TTT.Client.Game
             quitButton.gameObject.SetActive(true);
         }
 
-        private void SetTextState(PopupState state)
+        private void SetMiddleTextState(PopupState state)
         {
-            waitForOpponentText.gameObject.SetActive(state == PopupState.WaitForOpponent);
-            wantsToPlayAgainText.gameObject.SetActive(state == PopupState.WantsToPlayAgain);
-            opponentLeftText.gameObject.SetActive(state == PopupState.OpponentLeft);
+            middleTextRoot.gameObject.SetActive(
+                state is PopupState.WaitForOpponent or
+                         PopupState.WantsToPlayAgain or
+                         PopupState.OpponentLeft);
+
+            waitForOpponentText.enabled = state == PopupState.WaitForOpponent;
+            wantsToPlayAgainText.enabled = state == PopupState.WantsToPlayAgain;
+            opponentLeftText.enabled = state == PopupState.OpponentLeft;
         }
 
         private void OnPlayAgainMessageReceived(OnPlayAgain message)
@@ -143,7 +152,7 @@ namespace TTT.Client.Game
             networkClient.SendServer(message);
 
             SetButtonsState(PopupState.WaitForOpponent);
-            SetTextState(PopupState.WaitForOpponent);
+            SetMiddleTextState(PopupState.WaitForOpponent);
         }
 
         private PopupState GetPopupState(string winnerId, bool isDraw)
@@ -160,9 +169,9 @@ namespace TTT.Client.Game
 
         private void SetHeaderState(PopupState state, MarkType winnerMark = MarkType.None)
         {
-            youWinText.gameObject.SetActive(state == PopupState.Win);
-            youLooseText.gameObject.SetActive(state == PopupState.Loose);
-            drawText.gameObject.SetActive(state == PopupState.Draw);
+            youWinText.enabled = state == PopupState.Win;
+            youLooseText.enabled = state == PopupState.Loose;
+            drawText.enabled = state == PopupState.Draw;
 
             headerBackground.color = GetHeaderColor(state, winnerMark);
         }
@@ -201,13 +210,13 @@ namespace TTT.Client.Game
         [Button]
         private void SetStateDebug(PopupState state, MarkType mark)
         {
-            if(state is PopupState.Win or PopupState.Loose or PopupState.Draw)
+            if (state is PopupState.Win or PopupState.Loose or PopupState.Draw)
             {
                 SetHeaderState(state, mark);
             }
-            
+
             SetButtonsState(state);
-            SetTextState(state);
+            SetMiddleTextState(state);
         }
     }
 }
