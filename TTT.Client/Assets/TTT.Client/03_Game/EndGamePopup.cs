@@ -1,9 +1,11 @@
 ﻿using System;
 using DG.Tweening;
+using MessagePipe;
 using TMPro;
 using TriInspector;
 using TTT.Client.Configs;
 using TTT.Client.Gameplay;
+using TTT.Client.LocalMessages;
 using TTT.Shared.Models;
 using TTT.Shared.Packets.ClientServer;
 using UnityEngine;
@@ -42,13 +44,13 @@ namespace TTT.Client.Game
 
         [SerializeField]
         private TextMeshProUGUI drawText;
-        
+
         [SerializeField]
         private TextMeshProUGUI waitForOpponentText;
-        
+
         [SerializeField]
         private TextMeshProUGUI opponentLeftText;
-        
+
         [SerializeField]
         private TextMeshProUGUI wantsToPlayAgainText;
 
@@ -64,14 +66,18 @@ namespace TTT.Client.Game
 
         private IGameManager gameManager;
         private INetworkClient networkClient;
+        private IDisposable unSubscriber;
 
         [Inject]
         public void Construct(
             IGameManager gameManager,
-            INetworkClient networkClient)
+            INetworkClient networkClient,
+            ISubscriber<OnPlayAgain> onPlayAgain)
         {
             this.gameManager = gameManager;
             this.networkClient = networkClient;
+
+            unSubscriber = onPlayAgain.Subscribe(OnPlayAgainMessageReceived);
         }
 
         private void Start()
@@ -87,6 +93,7 @@ namespace TTT.Client.Game
             playAgainButton.onClick.RemoveListener(OnPlayAgainClicked);
             acceptButton.onClick.RemoveListener(OnAcceptClicked);
             quitButton.onClick.RemoveListener(OnQuitClicked);
+            unSubscriber?.Dispose();
         }
 
         public void Show(string winnerId, bool isDraw)
@@ -97,14 +104,24 @@ namespace TTT.Client.Game
             InternalShow();
         }
 
+        private void OnPlayAgainMessageReceived(OnPlayAgain message)
+        {
+            playAgainButton.gameObject.SetActive(false);
+            acceptButton.gameObject.SetActive(true);
+            
+            waitForOpponentText.gameObject.SetActive(false);
+            wantsToPlayAgainText.gameObject.SetActive(true);
+            opponentLeftText.gameObject.SetActive(false);
+        }
+
         private void OnQuitClicked()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         private void OnAcceptClicked()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         private void OnPlayAgainClicked()
@@ -114,10 +131,7 @@ namespace TTT.Client.Game
             wantsToPlayAgainText.gameObject.SetActive(false);
             opponentLeftText.gameObject.SetActive(false);
 
-            var message = new NetPlayAgainRequest()
-            {
-
-            };
+            var message = new NetPlayAgainRequest();
             networkClient.SendServer(message);
         }
 

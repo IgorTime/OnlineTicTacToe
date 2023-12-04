@@ -45,6 +45,7 @@ namespace TTT.Client.Scopes
         private void RegisterMessages(IContainerBuilder builder, MessagePipeOptions options)
         {
             builder.RegisterMessageBroker<OnCellMarked>(options);
+            builder.RegisterMessageBroker<OnPlayAgain>(options);
         }
     }
 }

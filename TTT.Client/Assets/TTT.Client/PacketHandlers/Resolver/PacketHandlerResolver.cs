@@ -18,6 +18,7 @@ namespace TTT.Client.PacketHandlers
             [(byte) PacketType.OnAuth] = typeof(OnAuthHandler),
             [(byte) PacketType.OnStartGame] = typeof(OnStartGameHandler),
             [(byte) PacketType.OnMarkCell] = typeof(OnMarkCellHandler),
+            [(byte) PacketType.OnPlayAgain] = typeof(OnPlayAgainHandler),
         };
 
         public PacketHandlerResolver(IObjectResolver objectResolver)
