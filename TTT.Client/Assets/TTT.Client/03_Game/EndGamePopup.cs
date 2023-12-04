@@ -21,6 +21,9 @@ namespace TTT.Client.Game
             Win = 0,
             Loose = 1,
             Draw = 2,
+            WaitForOpponent = 3,
+            WantsToPlayAgain = 4,
+            OpponentLeft = 5,
         }
 
         [SerializeField]
@@ -101,38 +104,46 @@ namespace TTT.Client.Game
             var state = GetPopupState(winnerId, isDraw);
             var winnerMark = isDraw ? MarkType.None : gameManager.ActiveGame.GetUserMark(winnerId);
             SetHeaderState(state, winnerMark);
+            SetButtonsState(state);
+            SetTextState(state);
             InternalShow();
+        }
+
+        private void SetButtonsState(PopupState state)
+        {
+            playAgainButton.gameObject.SetActive(state is PopupState.Win or PopupState.Loose or PopupState.Draw);
+            acceptButton.gameObject.SetActive(state == PopupState.WantsToPlayAgain);
+            quitButton.gameObject.SetActive(true);
+        }
+
+        private void SetTextState(PopupState state)
+        {
+            waitForOpponentText.gameObject.SetActive(state == PopupState.WaitForOpponent);
+            wantsToPlayAgainText.gameObject.SetActive(state == PopupState.WantsToPlayAgain);
+            opponentLeftText.gameObject.SetActive(state == PopupState.OpponentLeft);
         }
 
         private void OnPlayAgainMessageReceived(OnPlayAgain message)
         {
             playAgainButton.gameObject.SetActive(false);
             acceptButton.gameObject.SetActive(true);
-            
-            waitForOpponentText.gameObject.SetActive(false);
-            wantsToPlayAgainText.gameObject.SetActive(true);
-            opponentLeftText.gameObject.SetActive(false);
         }
 
         private void OnQuitClicked()
         {
-            throw new NotImplementedException();
         }
 
         private void OnAcceptClicked()
         {
-            throw new NotImplementedException();
         }
 
         private void OnPlayAgainClicked()
         {
-            playAgainButton.gameObject.SetActive(false);
-            waitForOpponentText.gameObject.SetActive(true);
-            wantsToPlayAgainText.gameObject.SetActive(false);
-            opponentLeftText.gameObject.SetActive(false);
-
             var message = new NetPlayAgainRequest();
             networkClient.SendServer(message);
+
+            SetButtonsState(PopupState.WaitForOpponent);
+            SetTextState(PopupState.WaitForOpponent);
         }
 
         private PopupState GetPopupState(string winnerId, bool isDraw)
@@ -190,7 +201,13 @@ namespace TTT.Client.Game
         [Button]
         private void SetStateDebug(PopupState state, MarkType mark)
         {
-            SetHeaderState(state, mark);
+            if(state is PopupState.Win or PopupState.Loose or PopupState.Draw)
+            {
+                SetHeaderState(state, mark);
+            }
+            
+            SetButtonsState(state);
+            SetTextState(state);
         }
     }
 }
