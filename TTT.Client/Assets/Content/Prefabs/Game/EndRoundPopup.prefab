@@ -740,6 +740,9 @@ MonoBehaviour:
   youWinText: {fileID: 8977813378328443171}
   youLooseText: {fileID: 8164755686801087013}
   drawText: {fileID: 1090774747260171910}
+  waitForOpponentText: {fileID: 6707927737583341358}
+  opponentLeftText: {fileID: 7230011852662225446}
+  wantsToPlayAgainText: {fileID: 3359848638205827453}
   playAgainButton: {fileID: 3959604808866828053}
   acceptButton: {fileID: 3631575161796372028}
   quitButton: {fileID: 5202526471571222770}

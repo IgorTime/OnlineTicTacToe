@@ -1,9 +1,11 @@
-﻿using DG.Tweening;
+﻿using System;
+using DG.Tweening;
 using TMPro;
 using TriInspector;
 using TTT.Client.Configs;
 using TTT.Client.Gameplay;
 using TTT.Shared.Models;
+using TTT.Shared.Packets.ClientServer;
 using UnityEngine;
 using UnityEngine.UI;
 using VContainer;
@@ -40,6 +42,15 @@ namespace TTT.Client.Game
 
         [SerializeField]
         private TextMeshProUGUI drawText;
+        
+        [SerializeField]
+        private TextMeshProUGUI waitForOpponentText;
+        
+        [SerializeField]
+        private TextMeshProUGUI opponentLeftText;
+        
+        [SerializeField]
+        private TextMeshProUGUI wantsToPlayAgainText;
 
         [Header("Buttons:")]
         [SerializeField]
@@ -52,11 +63,15 @@ namespace TTT.Client.Game
         private Button quitButton;
 
         private IGameManager gameManager;
+        private INetworkClient networkClient;
 
         [Inject]
-        public void Construct(IGameManager gameManager)
+        public void Construct(
+            IGameManager gameManager,
+            INetworkClient networkClient)
         {
             this.gameManager = gameManager;
+            this.networkClient = networkClient;
         }
 
         private void Start()
@@ -67,10 +82,17 @@ namespace TTT.Client.Game
             quitButton.onClick.AddListener(OnQuitClicked);
         }
 
+        private void OnDestroy()
+        {
+            playAgainButton.onClick.RemoveListener(OnPlayAgainClicked);
+            acceptButton.onClick.RemoveListener(OnAcceptClicked);
+            quitButton.onClick.RemoveListener(OnQuitClicked);
+        }
+
         public void Show(string winnerId, bool isDraw)
         {
             var state = GetPopupState(winnerId, isDraw);
-            var winnerMark  = isDraw ? MarkType.None : gameManager.ActiveGame.GetUserMark(winnerId);
+            var winnerMark = isDraw ? MarkType.None : gameManager.ActiveGame.GetUserMark(winnerId);
             SetHeaderState(state, winnerMark);
             InternalShow();
         }
@@ -87,7 +109,16 @@ namespace TTT.Client.Game
 
         private void OnPlayAgainClicked()
         {
-            throw new System.NotImplementedException();
+            playAgainButton.gameObject.SetActive(false);
+            waitForOpponentText.gameObject.SetActive(true);
+            wantsToPlayAgainText.gameObject.SetActive(false);
+            opponentLeftText.gameObject.SetActive(false);
+
+            var message = new NetPlayAgainRequest()
+            {
+
+            };
+            networkClient.SendServer(message);
         }
 
         private PopupState GetPopupState(string winnerId, bool isDraw)
@@ -107,17 +138,17 @@ namespace TTT.Client.Game
             youWinText.gameObject.SetActive(state == PopupState.Win);
             youLooseText.gameObject.SetActive(state == PopupState.Loose);
             drawText.gameObject.SetActive(state == PopupState.Draw);
-            
+
             headerBackground.color = GetHeaderColor(state, winnerMark);
         }
 
         private Color GetHeaderColor(PopupState state, MarkType winnerMark)
         {
-            if(state == PopupState.Draw)
+            if (state == PopupState.Draw)
             {
                 return headerBackground.color;
             }
-            
+
             return state == PopupState.Loose
                 ? Color.red
                 : winnerMark == MarkType.X
@@ -141,7 +172,7 @@ namespace TTT.Client.Game
             content.gameObject.SetActive(false);
             background.gameObject.SetActive(false);
         }
-        
+
         [Button]
         private void SetStateDebug(PopupState state, MarkType mark)
         {

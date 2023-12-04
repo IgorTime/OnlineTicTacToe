@@ -46,7 +46,7 @@ public class MarkCellRequestHandler : PacketHandler<NetMarkCellRequest>
             WinLine = result.WinLine
         };
         
-        var opponentId = game.GetOpponent(userId);
+        var opponentId = game.GetOpponentId(userId);
         var opponentConnection = usersManager.GetConnection(opponentId);
         
         networkServer.SendClient(connection.ConnectionId, response);

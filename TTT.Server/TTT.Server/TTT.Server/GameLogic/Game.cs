@@ -58,11 +58,11 @@ public class Game
 
     public MarkType GetCell(byte cellIndex) => grid3X3.GetCell(cellIndex);
 
-    public string GetOpponent(string userId) => XUser == userId ? OUser : XUser;
+    public string GetOpponentId(string userId) => XUser == userId ? OUser : XUser;
 
     public void SwitchCurrentPlayer()
     {
-        CurrentUser = GetOpponent(CurrentUser);
+        CurrentUser = GetOpponentId(CurrentUser);
     }
 
     public void AddWin(string userId)
@@ -82,4 +82,17 @@ public class Game
         userId == XUser
             ? MarkType.X
             : MarkType.O;
+
+    public void SetReadyToPlayAgain(string userId)
+    {
+        var playerType = GetPlayerType(userId);
+        if (playerType == MarkType.X)
+        {
+            XWantsRematch = true;
+        }
+        else
+        {
+            OWantsRematch = true;
+        }
+    }
 }

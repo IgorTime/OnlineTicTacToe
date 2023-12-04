@@ -10,6 +10,7 @@
         FindOpponentRequest = 3,
         CancelFindOpponentRequest = 4,
         MarkCellRequest = 5,
+        PlayAgainRequest = 6,
 
         #endregion
 
@@ -21,6 +22,7 @@
         OnFindOpponent = 103,
         OnStartGame = 104,
         OnMarkCell = 105,
+        OnPlayAgain = 106,
 
         #endregion
     }
