@@ -1,4 +1,5 @@
 ﻿using System;
+using TTT.Shared.Models;
 
 namespace TTT.Client.Gameplay
 {
@@ -17,5 +18,20 @@ namespace TTT.Client.Gameplay
         }
 
         private string GetOpponent(string currentUser) => XUser == currentUser ? OUser : XUser;
+
+        public MarkType GetUserMark(string userId)
+        {
+            if (userId == XUser)
+            {
+                return MarkType.X;
+            }
+
+            if (userId == OUser)
+            {
+                return MarkType.O;
+            }
+
+            throw new ArgumentException("User is not part of this game");
+        }
     }
 }

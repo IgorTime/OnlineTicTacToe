@@ -1,6 +1,8 @@
 ﻿using TMPro;
+using TriInspector;
 using TTT.Client.Configs;
 using TTT.Client.Gameplay;
+using TTT.Shared.Models;
 using UnityEngine;
 using UnityEngine.UI;
 using VContainer;
@@ -67,8 +69,8 @@ namespace TTT.Client.Game
         public void Show(string winnerId, bool isDraw)
         {
             var state = GetPopupState(winnerId, isDraw);
-            SetHeaderState(state);
-
+            var winnerMark  = isDraw ? MarkType.None : gameManager.ActiveGame.GetUserMark(winnerId);
+            SetHeaderState(state, winnerMark);
             InternalShow();
         }
 
@@ -99,11 +101,27 @@ namespace TTT.Client.Game
                 : PopupState.Loose;
         }
 
-        private void SetHeaderState(PopupState state)
+        private void SetHeaderState(PopupState state, MarkType winnerMark = MarkType.None)
         {
             youWinText.gameObject.SetActive(state == PopupState.Win);
             youLooseText.gameObject.SetActive(state == PopupState.Loose);
             drawText.gameObject.SetActive(state == PopupState.Draw);
+            
+            headerBackground.color = GetHeaderColor(state, winnerMark);
+        }
+
+        private Color GetHeaderColor(PopupState state, MarkType winnerMark)
+        {
+            if(state == PopupState.Draw)
+            {
+                return headerBackground.color;
+            }
+            
+            return state == PopupState.Loose
+                ? Color.red
+                : winnerMark == MarkType.X
+                    ? playerColors.XPlayerColor
+                    : playerColors.OPlayerColor;
         }
 
         private void InternalShow()
@@ -116,6 +134,12 @@ namespace TTT.Client.Game
         {
             content.gameObject.SetActive(false);
             background.gameObject.SetActive(false);
+        }
+        
+        [Button]
+        private void SetStateDebug(PopupState state, MarkType mark)
+        {
+            SetHeaderState(state, mark);
         }
     }
 }
