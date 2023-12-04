@@ -1,4 +1,5 @@
 ﻿using System;
+using Cysharp.Threading.Tasks;
 using MessagePipe;
 using TTT.Client.Gameplay;
 using TTT.Client.LocalMessages;
@@ -19,6 +20,13 @@ namespace TTT.Client.Game
 
         [SerializeField]
         private TurnUI turnUI;
+        
+        [Header("End game popup:")]
+        [SerializeField]
+        private EndGamePopup endGamePopup;
+        
+        [SerializeField]
+        private float showPopupDelay = 1.5f;
 
         private IGameManager gameManager;
         private IDisposable unSubscriber;
@@ -48,18 +56,22 @@ namespace TTT.Client.Game
             if (message.Outcome != MarkOutcome.None)
             {
                 var isDraw = message.Outcome == MarkOutcome.Draw;
-                if (isDraw)
-                {
-                    Debug.Log("Game over! Draw!");
-                }
-                else
-                {
-                    Debug.Log("Game over! " + message.Actor + $" won! Line {message.WinLine.ToString()}");
-                }
+                ShowEndGamePopup(message.Actor, isDraw).Forget();
                 return;
             }
 
             turnUI.SetTurn(gameManager.IsMyTurn);
+        }
+
+        private async UniTaskVoid ShowEndGamePopup(string winnerId, bool isDraw)
+        {
+            await UniTask.Delay(TimeSpan.FromSeconds(showPopupDelay), cancellationToken: destroyCancellationToken);
+            if(destroyCancellationToken.IsCancellationRequested)
+            {
+                return;
+            }
+
+            endGamePopup.Show(winnerId, isDraw);
         }
 
         private void InitHeader()

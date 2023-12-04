@@ -132,6 +132,8 @@ MonoBehaviour:
   xUserView: {fileID: 8446165470735798067}
   oUserView: {fileID: 2954664354056340132}
   turnUI: {fileID: 7790800634542870713}
+  endGamePopup: {fileID: 2562588915912976360}
+  showPopupDelay: 1.5
 --- !u!1 &1229307831094015615
 GameObject:
   m_ObjectHideFlags: 0
@@ -2053,6 +2055,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d7ee021e4a7160d4cabe8200151c39ff, type: 3}
+--- !u!114 &2562588915912976360 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3484167747434646029, guid: d7ee021e4a7160d4cabe8200151c39ff, type: 3}
+  m_PrefabInstance: {fileID: 1426063358086327781}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81c6a2bbbbc24e75b54917015fe76de4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &6800011056230027069 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5590122821440135896, guid: d7ee021e4a7160d4cabe8200151c39ff, type: 3}
