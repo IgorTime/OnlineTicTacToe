@@ -53,7 +53,7 @@ public class Game
 
         return result;
     }
-    
+
     public string GetGridString() => grid3X3.ToString();
 
     public MarkType GetCell(byte cellIndex) => grid3X3.GetCell(cellIndex);
@@ -78,11 +78,6 @@ public class Game
         }
     }
 
-    private MarkType GetPlayerType(string userId) =>
-        userId == XUser
-            ? MarkType.X
-            : MarkType.O;
-
     public void SetReadyToPlayAgain(string userId)
     {
         var playerType = GetPlayerType(userId);
@@ -95,4 +90,21 @@ public class Game
             OWantsRematch = true;
         }
     }
+
+    public bool BothPlayersReadyToRematch() => XWantsRematch && OWantsRematch;
+
+    public void NewRound()
+    {
+        Round++;
+        CurrentRoundStartTime = DateTime.UtcNow;
+        grid3X3 = new Grid3X3();
+        CurrentUser = XUser;
+        XWantsRematch = false;
+        OWantsRematch = false;
+    }
+
+    private MarkType GetPlayerType(string userId) =>
+        userId == XUser
+            ? MarkType.X
+            : MarkType.O;
 }

@@ -144,6 +144,9 @@ namespace TTT.Client.Game
 
         private void OnAcceptClicked()
         {
+            acceptButton.gameObject.SetActive(false);
+            var message = new NetAcceptAgainRequest();
+            networkClient.SendServer(message);
         }
 
         private void OnPlayAgainClicked()
