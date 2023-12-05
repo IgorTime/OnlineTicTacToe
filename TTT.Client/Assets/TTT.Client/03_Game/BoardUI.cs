@@ -11,7 +11,7 @@ namespace TTT.Client.Game
 {
     public class BoardUI : MonoBehaviour
     {
-        public const byte BOARD_SIZE = 3;
+        private const byte BOARD_SIZE = 3;
 
         [SerializeField]
         private CellView[] cells;
@@ -27,12 +27,16 @@ namespace TTT.Client.Game
         public void Construct(
             IGameManager gameManager,
             INetworkClient networkClient,
-            ISubscriber<OnCellMarked> onCellMarked)
+            ISubscriber<OnCellMarked> onCellMarked,
+            ISubscriber<OnGameRestart> onGameRestart)
         {
             this.gameManager = gameManager;
             this.networkClient = networkClient;
 
-            unSubscriber = onCellMarked.Subscribe(OnCellMarked);
+            var bag = DisposableBag.CreateBuilder();
+            onCellMarked.Subscribe(OnCellMarked).AddTo(bag);
+            onGameRestart.Subscribe(OnGameRestart).AddTo(bag);
+            unSubscriber = bag.Build();
         }
 
         private void Start()
@@ -45,7 +49,7 @@ namespace TTT.Client.Game
             unSubscriber?.Dispose();
         }
 
-        public void ResetBoard()
+        private void ResetBoard()
         {
             for (var i = 0; i < cells.Length; i++)
             {
@@ -68,6 +72,11 @@ namespace TTT.Client.Game
             {
                 winLineUI.SetLine(message.WinLine, withAnimation: true);
             }
+        }
+        
+        private void OnGameRestart(OnGameRestart message)
+        {
+            ResetBoard();
         }
 
         private void OnCellClicked(int cellIndex)

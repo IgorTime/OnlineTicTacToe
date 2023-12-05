@@ -34,10 +34,15 @@ namespace TTT.Client.Game
         [Inject]
         public void Construct(
             IGameManager gameManager,
-            ISubscriber<OnCellMarked> onCellMarked)
+            ISubscriber<OnCellMarked> onCellMarked,
+            ISubscriber<OnGameRestart> onGameRestart)
         {
             this.gameManager = gameManager;
-            unSubscriber = onCellMarked.Subscribe(OnCellMarked);
+            
+            var bag = DisposableBag.CreateBuilder();
+            onCellMarked.Subscribe(OnCellMarked).AddTo(bag);
+            onGameRestart.Subscribe(OnGameRestart).AddTo(bag);
+            unSubscriber = bag.Build();
         }
 
         private void Start()
@@ -60,6 +65,11 @@ namespace TTT.Client.Game
                 return;
             }
 
+            turnUI.SetTurn(gameManager.IsMyTurn);
+        }
+        
+        private void OnGameRestart(OnGameRestart message)
+        {
             turnUI.SetTurn(gameManager.IsMyTurn);
         }
 

@@ -14,5 +14,6 @@ namespace TTT.Client.Gameplay
         bool InputEnabled { get; set; }
         bool IsMyTurn { get; }
         void RegisterGame(Guid gameId, string xUser, string oUser);
+        void Reset();
     }
 }

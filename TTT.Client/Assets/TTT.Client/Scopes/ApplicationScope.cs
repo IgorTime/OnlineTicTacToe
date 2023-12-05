@@ -46,6 +46,7 @@ namespace TTT.Client.Scopes
         {
             builder.RegisterMessageBroker<OnCellMarked>(options);
             builder.RegisterMessageBroker<OnPlayAgain>(options);
+            builder.RegisterMessageBroker<OnGameRestart>(options);
         }
     }
 }

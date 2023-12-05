@@ -26,11 +26,11 @@ namespace TTT.Client.Game
         [ShowInInspector]
         [ReadOnly]
         public int Index { get; private set; }
-        
+
         [ShowInInspector]
         [ReadOnly]
         public int Row { get; private set; }
-        
+
         [ShowInInspector]
         [ReadOnly]
         public int Column { get; private set; }
@@ -40,7 +40,7 @@ namespace TTT.Client.Game
             button.onClick.AddListener(OnCellClicked);
         }
 
-        public void SetMark(MarkType markType)
+        private void SetMark(MarkType markType)
         {
             xMark.SetActive(markType == MarkType.X);
             oMark.SetActive(markType == MarkType.O);

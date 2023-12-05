@@ -79,12 +79,16 @@ namespace TTT.Client.Game
         public void Construct(
             IGameManager gameManager,
             INetworkClient networkClient,
-            ISubscriber<OnPlayAgain> onPlayAgain)
+            ISubscriber<OnPlayAgain> onPlayAgain,
+            ISubscriber<OnGameRestart> onGameRestart)
         {
             this.gameManager = gameManager;
             this.networkClient = networkClient;
 
-            unSubscriber = onPlayAgain.Subscribe(OnPlayAgainMessageReceived);
+            var bag = DisposableBag.CreateBuilder();
+            onPlayAgain.Subscribe(OnPlayAgainMessageReceived).AddTo(bag);
+            onGameRestart.Subscribe(OnGameRestart).AddTo(bag);
+            unSubscriber = bag.Build();
         }
 
         private void Start()
@@ -134,8 +138,8 @@ namespace TTT.Client.Game
 
         private void OnPlayAgainMessageReceived(OnPlayAgain message)
         {
-            playAgainButton.gameObject.SetActive(false);
-            acceptButton.gameObject.SetActive(true);
+            SetButtonsState(PopupState.WantsToPlayAgain);
+            SetMiddleTextState(PopupState.WantsToPlayAgain);
         }
 
         private void OnQuitClicked()
@@ -191,6 +195,11 @@ namespace TTT.Client.Game
                 : winnerMark == MarkType.X
                     ? playerColors.XPlayerColor
                     : playerColors.OPlayerColor;
+        }
+        
+        private void OnGameRestart(OnGameRestart message)
+        {
+            InternalHide();
         }
 
         private void InternalShow()

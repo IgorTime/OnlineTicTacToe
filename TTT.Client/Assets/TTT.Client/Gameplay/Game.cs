@@ -33,5 +33,10 @@ namespace TTT.Client.Gameplay
 
             throw new ArgumentException("User is not part of this game");
         }
+
+        public void Reset()
+        {
+            CurrentUser = XUser;
+        }
     }
 }

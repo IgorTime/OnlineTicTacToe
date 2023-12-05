@@ -29,8 +29,6 @@ namespace TTT.Client.Gameplay
             }
         }
 
-        public string CurrentUser { get; set; }
-
         public GameManager(IUserService userService)
         {
             this.userService = userService;
@@ -53,6 +51,11 @@ namespace TTT.Client.Gameplay
             OpponentMark = MyMark == MarkType.X ? MarkType.O : MarkType.X;
 
             InputEnabled = true;
+        }
+
+        public void Reset()
+        {
+            ActiveGame.Reset();
         }
     }
 }
