@@ -21,6 +21,7 @@ namespace TTT.Client.PacketHandlers
             [(byte) PacketType.OnPlayAgain] = typeof(OnPlayAgainHandler),
             [(byte) PacketType.OnNewRound] = typeof(OnNewRoundHandler),
             [(byte) PacketType.OnSurrender] = typeof(OnSurrenderHandler),
+            [(byte) PacketType.OnQuitGame] = typeof(OnQuitGameHandler),
         };
 
         public PacketHandlerResolver(IObjectResolver objectResolver)

@@ -6,8 +6,10 @@ using TriInspector;
 using TTT.Client.Configs;
 using TTT.Client.Gameplay;
 using TTT.Client.LocalMessages;
+using TTT.Client.Services;
 using TTT.Shared.Models;
 using TTT.Shared.Packets.ClientServer;
+using UnityEditor.Localization.Plugins.XLIFF.V20;
 using UnityEngine;
 using UnityEngine.UI;
 using VContainer;
@@ -74,20 +76,26 @@ namespace TTT.Client.Game
         private IGameManager gameManager;
         private INetworkClient networkClient;
         private IDisposable unSubscriber;
-
+        private ISceneLoader sceneLoader;
+        private bool opponentLeft;
+        
         [Inject]
         public void Construct(
             IGameManager gameManager,
             INetworkClient networkClient,
+            ISceneLoader sceneLoader,
             ISubscriber<OnPlayAgain> onPlayAgain,
-            ISubscriber<OnGameRestart> onGameRestart)
+            ISubscriber<OnGameRestart> onGameRestart,
+            ISubscriber<OnOpponentQuitGame> onQuitGame)
         {
             this.gameManager = gameManager;
             this.networkClient = networkClient;
+            this.sceneLoader = sceneLoader;
 
             var bag = DisposableBag.CreateBuilder();
             onPlayAgain.Subscribe(OnPlayAgainMessageReceived).AddTo(bag);
             onGameRestart.Subscribe(OnGameRestart).AddTo(bag);
+            onQuitGame.Subscribe(OnOpponentQuitGame).AddTo(bag);
             unSubscriber = bag.Build();
         }
 
@@ -144,8 +152,25 @@ namespace TTT.Client.Game
 
         private void OnQuitClicked()
         {
+            if (opponentLeft)
+            {
+                sceneLoader.LoadLobbyScene();
+                return;
+            }
+            
+            quitButton.interactable = false;
+            
+            var message = new NetQuitGameRequest();
+            networkClient.SendServer(message);
         }
 
+        private void OnOpponentQuitGame(OnOpponentQuitGame message)
+        {
+            opponentLeft = true;
+            SetButtonsState(PopupState.OpponentLeft);
+            SetMiddleTextState(PopupState.OpponentLeft);
+        }
+        
         private void OnAcceptClicked()
         {
             acceptButton.gameObject.SetActive(false);
