@@ -4,7 +4,9 @@ using MessagePipe;
 using TTT.Client.Gameplay;
 using TTT.Client.LocalMessages;
 using TTT.Shared.Models;
+using TTT.Shared.Packets.ClientServer;
 using UnityEngine;
+using UnityEngine.UI;
 using VContainer;
 
 namespace TTT.Client.Game
@@ -28,16 +30,23 @@ namespace TTT.Client.Game
         [SerializeField]
         private float showPopupDelay = 1.5f;
 
+        [Header("Footer:")]
+        [SerializeField]
+        private Button surrenderButton;
+
         private IGameManager gameManager;
         private IDisposable unSubscriber;
+        private INetworkClient networkClient;
 
         [Inject]
         public void Construct(
             IGameManager gameManager,
+            INetworkClient networkClient,
             ISubscriber<OnCellMarked> onCellMarked,
             ISubscriber<OnGameRestart> onGameRestart)
         {
             this.gameManager = gameManager;
+            this.networkClient = networkClient;
             
             var bag = DisposableBag.CreateBuilder();
             onCellMarked.Subscribe(OnCellMarked).AddTo(bag);
@@ -49,11 +58,19 @@ namespace TTT.Client.Game
         {
             InitHeader();
             turnUI.SetTurn(gameManager.IsMyTurn);
+            surrenderButton.onClick.AddListener(OnSurrenderClick);
         }
 
         private void OnDestroy()
         {
             unSubscriber?.Dispose();
+            surrenderButton.onClick.RemoveListener(OnSurrenderClick);
+        }
+
+        private void OnSurrenderClick()
+        {
+            var message = new NetSurrenderRequest();
+            networkClient.SendServer(message);
         }
 
         private void OnCellMarked(OnCellMarked message)
