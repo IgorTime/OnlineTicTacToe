@@ -43,7 +43,8 @@ namespace TTT.Client.Game
             IGameManager gameManager,
             INetworkClient networkClient,
             ISubscriber<OnCellMarked> onCellMarked,
-            ISubscriber<OnGameRestart> onGameRestart)
+            ISubscriber<OnGameRestart> onGameRestart,
+            ISubscriber<OnSurrender> onSurrender)
         {
             this.gameManager = gameManager;
             this.networkClient = networkClient;
@@ -51,6 +52,7 @@ namespace TTT.Client.Game
             var bag = DisposableBag.CreateBuilder();
             onCellMarked.Subscribe(OnCellMarked).AddTo(bag);
             onGameRestart.Subscribe(OnGameRestart).AddTo(bag);
+            onSurrender.Subscribe(OnSurrender).AddTo(bag);
             unSubscriber = bag.Build();
         }
 
@@ -88,6 +90,11 @@ namespace TTT.Client.Game
         private void OnGameRestart(OnGameRestart message)
         {
             turnUI.SetTurn(gameManager.IsMyTurn);
+        }
+        
+        private void OnSurrender(OnSurrender message)
+        {
+            ShowEndGamePopup(message.Winner, false).Forget();
         }
 
         private async UniTaskVoid ShowEndGamePopup(string winnerId, bool isDraw)

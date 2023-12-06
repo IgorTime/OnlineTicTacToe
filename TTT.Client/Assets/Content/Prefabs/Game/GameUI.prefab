@@ -134,6 +134,7 @@ MonoBehaviour:
   turnUI: {fileID: 7790800634542870713}
   endGamePopup: {fileID: 2562588915912976360}
   showPopupDelay: 1.5
+  surrenderButton: {fileID: 4287878855082055079}
 --- !u!1 &1229307831094015615
 GameObject:
   m_ObjectHideFlags: 0

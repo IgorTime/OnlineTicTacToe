@@ -20,6 +20,7 @@ namespace TTT.Client.PacketHandlers
             [(byte) PacketType.OnMarkCell] = typeof(OnMarkCellHandler),
             [(byte) PacketType.OnPlayAgain] = typeof(OnPlayAgainHandler),
             [(byte) PacketType.OnNewRound] = typeof(OnNewRoundHandler),
+            [(byte) PacketType.OnSurrender] = typeof(OnSurrenderHandler),
         };
 
         public PacketHandlerResolver(IObjectResolver objectResolver)
