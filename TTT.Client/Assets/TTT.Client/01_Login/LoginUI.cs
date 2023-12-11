@@ -56,6 +56,12 @@ namespace TTT.Client.Login
 
         private async void Login()
         {
+            if (string.IsNullOrEmpty(usernameInput.text) ||
+                string.IsNullOrEmpty(passwordInput.text))
+            {
+                return;
+            }
+
             loginButton.interactable = false;
             loginError.gameObject.SetActive(false);
 

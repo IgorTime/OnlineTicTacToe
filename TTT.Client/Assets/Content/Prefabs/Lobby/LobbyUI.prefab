@@ -1160,7 +1160,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4488926764736339646}
   - component: {fileID: 4401238756340044885}
-  - component: {fileID: 7135725062598475091}
+  - component: {fileID: 4077879116358932578}
   - component: {fileID: 6681631631765679471}
   m_Layer: 5
   m_Name: LobbyUI
@@ -1200,7 +1200,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5400007436976185865}
   m_CullTransparentMesh: 1
---- !u!114 &7135725062598475091
+--- !u!114 &4077879116358932578
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1213,14 +1213,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
-  m_RaycastTarget: 1
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 0}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
