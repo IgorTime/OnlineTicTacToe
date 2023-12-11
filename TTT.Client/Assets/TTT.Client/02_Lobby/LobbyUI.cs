@@ -1,9 +1,9 @@
 using TMPro;
 using TTT.Client.PacketHandlers;
+using TTT.Client.Services;
 using TTT.Shared.Packets.ClientServer;
 using TTT.Shared.Packets.ServerClient;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using VContainer;
 
@@ -34,11 +34,15 @@ namespace TTT.Client.Lobby
         private Button cancelFindOpponentButton;
 
         private INetworkClient networkClient;
+        private ISceneLoader sceneLoader;
 
         [Inject]
-        public void Construct(INetworkClient networkClient)
+        public void Construct(
+            INetworkClient networkClient,
+            ISceneLoader sceneLoader)
         {
             this.networkClient = networkClient;
+            this.sceneLoader = sceneLoader;
         }
 
         private void Start()
@@ -75,7 +79,7 @@ namespace TTT.Client.Lobby
         private void OnLogoutButtonClicked()
         {
             networkClient.Disconnect();
-            SceneManager.LoadScene("00_Main");
+            sceneLoader.LoadLoginScene();
         }
 
         private void RequestServerStatus()
@@ -108,10 +112,5 @@ namespace TTT.Client.Lobby
                 DestroyImmediate(rectTransform.GetChild(0).gameObject);
             }
         }
-
-        // Find Opponents
-        // Cancel find opponent method
-        // Logout
-        // Refresh ui
     }
 }
