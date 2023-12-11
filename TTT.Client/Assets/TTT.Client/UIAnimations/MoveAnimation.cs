@@ -3,7 +3,7 @@ using TTT.Client.UIAnimations;
 using UnityEngine;
 
 [DeclareFoldoutGroup("Debug")]
-public class MoveAnimation : UIAnimation
+public class MoveAnimation : RectTransformAnimation
 {
     [SerializeField]
     private RectTransform startPosition;

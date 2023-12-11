@@ -2,7 +2,7 @@
 
 namespace TTT.Client.UIAnimations
 {
-    public class ScaleAnimation : UIAnimation
+    public class ScaleAnimation : RectTransformAnimation
     {
         [SerializeField]
         private Vector3 startScale = Vector3.zero;

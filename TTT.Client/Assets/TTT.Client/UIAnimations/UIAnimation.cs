@@ -5,11 +5,10 @@ using UnityEngine;
 
 namespace TTT.Client.UIAnimations
 {
-    public abstract class UIAnimation : MonoBehaviour
+    public abstract class UIAnimation<T> : MonoBehaviour
+        where T : Object
     {
-        [SerializeField]
-        [Tooltip("If empty then use self")]
-        private RectTransform animationTarget;
+       
 
         [Header("Start:")]
         [SerializeField]
@@ -27,8 +26,6 @@ namespace TTT.Client.UIAnimations
         private Ease animationEase = Ease.OutCubic;
 
         private Tweener uiAnimation;
-
-        protected RectTransform AnimationTarget { get; private set; }
         public bool IsPlaying => uiAnimation.IsPlaying();
 
         private async UniTaskVoid Awake()
@@ -69,10 +66,7 @@ namespace TTT.Client.UIAnimations
 
         protected abstract void Animate(float progress);
 
-        private void InitAnimationTarget()
-        {
-            AnimationTarget = animationTarget ? animationTarget : (RectTransform) transform;
-        }
+        protected abstract void InitAnimationTarget();
 
         private void CreateAnimation()
         {
