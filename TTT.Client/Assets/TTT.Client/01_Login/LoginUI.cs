@@ -32,6 +32,7 @@ namespace TTT.Client.Login
             INetworkClient networkClient,
             IUserService userService)
         {
+            Debug.Log("Construct");
             this.networkClient = networkClient;
             this.userService = userService;
         }
