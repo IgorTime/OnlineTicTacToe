@@ -2,14 +2,13 @@
 using DG.Tweening;
 using TriInspector;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace TTT.Client.UIAnimations
 {
     public abstract class UIAnimation<T> : MonoBehaviour
         where T : Object
     {
-       
-
         [Header("Start:")]
         [SerializeField]
         private bool animateOnStart = true;
@@ -28,20 +27,17 @@ namespace TTT.Client.UIAnimations
         private Tweener uiAnimation;
         public bool IsPlaying => uiAnimation.IsPlaying();
 
-        private async UniTaskVoid Awake()
+        private void Awake()
         {
             InitAnimationTarget();
             CreateAnimation();
+        }
 
+        private void Start()
+        {
             if (animateOnStart)
             {
-                if (startDelay > 0)
-                {
-                    await UniTask.Delay((int) (startDelay * 1000), cancellationToken: destroyCancellationToken);
-                    destroyCancellationToken.ThrowIfCancellationRequested();
-                }
-
-                PlayForward();
+                PlayOnStart().Forget();
             }
         }
 
@@ -67,6 +63,18 @@ namespace TTT.Client.UIAnimations
         protected abstract void Animate(float progress);
 
         protected abstract void InitAnimationTarget();
+
+        private async UniTaskVoid PlayOnStart()
+        {
+            if (startDelay > 0)
+            {
+                Animate(0f);
+                await UniTask.Delay((int) (startDelay * 1000), cancellationToken: destroyCancellationToken);
+                destroyCancellationToken.ThrowIfCancellationRequested();
+            }
+
+            PlayForward();
+        }
 
         private void CreateAnimation()
         {
