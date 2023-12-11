@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MessagePipe;
+using TTT.Client.LocalMessages;
 using TTT.Shared.Handlers;
 using TTT.Shared.Packets.ServerClient;
 
@@ -6,11 +7,20 @@ namespace TTT.Client.PacketHandlers
 {
     public class OnServerStatusRequestHandler : PacketHandler<NetOnServerStatus>
     {
-        public static Action<NetOnServerStatus> OnServerStatus;
+        private readonly IPublisher<OnServerStatusUpdated> onServerStatusUpdatedPublisher;
+
+        public OnServerStatusRequestHandler(IPublisher<OnServerStatusUpdated> onServerStatusUpdatedPublisher)
+        {
+            this.onServerStatusUpdatedPublisher = onServerStatusUpdatedPublisher;
+        }
 
         protected override void Handle(NetOnServerStatus packet, int connectionId)
         {
-            OnServerStatus?.Invoke(packet);
+            onServerStatusUpdatedPublisher.Publish(new OnServerStatusUpdated()
+            {
+                PlayersCount = packet.PlayersCount,
+                TopPlayers = packet.TopPlayers,
+            });
         }
     }
 }

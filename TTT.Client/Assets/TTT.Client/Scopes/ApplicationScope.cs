@@ -49,6 +49,7 @@ namespace TTT.Client.Scopes
             builder.RegisterMessageBroker<OnGameRestart>(options);
             builder.RegisterMessageBroker<OnSurrender>(options);
             builder.RegisterMessageBroker<OnOpponentQuitGame>(options);
+            builder.RegisterMessageBroker<OnServerStatusUpdated>(options);
         }
     }
 }

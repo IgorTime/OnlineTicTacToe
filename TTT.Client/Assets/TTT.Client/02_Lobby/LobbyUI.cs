@@ -1,5 +1,7 @@
+using System;
+using MessagePipe;
 using TMPro;
-using TTT.Client.PacketHandlers;
+using TTT.Client.LocalMessages;
 using TTT.Client.Services;
 using TTT.Shared.Packets.ClientServer;
 using TTT.Shared.Packets.ServerClient;
@@ -35,20 +37,26 @@ namespace TTT.Client.Lobby
 
         private INetworkClient networkClient;
         private ISceneLoader sceneLoader;
+        private IDisposable unsubscribe;
 
         [Inject]
         public void Construct(
             INetworkClient networkClient,
-            ISceneLoader sceneLoader)
+            ISceneLoader sceneLoader,
+            ISubscriber<OnServerStatusUpdated> onServerStatusUpdatedSubscriber)
         {
             this.networkClient = networkClient;
             this.sceneLoader = sceneLoader;
+            
+            var bag = DisposableBag.CreateBuilder();
+            onServerStatusUpdatedSubscriber.Subscribe(Refresh).AddTo(bag);
+            unsubscribe = bag.Build();
+            
+            RequestServerStatus();
         }
 
         private void Start()
         {
-            OnServerStatusRequestHandler.OnServerStatus += Refresh;
-            RequestServerStatus();
             logoutButton.onClick.AddListener(OnLogoutButtonClicked);
             findOpponentButton.onClick.AddListener(OnFindOpponentButtonClicked);
             cancelFindOpponentButton.onClick.AddListener(OnCancelFindOpponentButtonClicked);
@@ -56,7 +64,7 @@ namespace TTT.Client.Lobby
 
         private void OnDestroy()
         {
-            OnServerStatusRequestHandler.OnServerStatus -= Refresh;
+            unsubscribe?.Dispose();
             logoutButton.onClick.RemoveListener(OnLogoutButtonClicked);
         }
 
@@ -88,10 +96,12 @@ namespace TTT.Client.Lobby
             networkClient.SendServer(msg);
         }
 
-        private void Refresh(NetOnServerStatus message)
+        private void Refresh(OnServerStatusUpdated message)
         {
+            // TODO this is naive and fast version. Rewrite for production
             DestroyAllChildren(topPlayersContainer);
             CreateTopPlayers(message.TopPlayers);
+            
             onlinePlayersCount.text = $"{message.PlayersCount} players online";
         }
 
