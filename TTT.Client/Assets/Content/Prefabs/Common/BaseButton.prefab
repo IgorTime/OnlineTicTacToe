@@ -146,7 +146,7 @@ GameObject:
   - component: {fileID: 4663147154920914427}
   - component: {fileID: 1183517773349016315}
   - component: {fileID: 6408321790193268983}
-  - component: {fileID: 2743529946995833748}
+  - component: {fileID: 1828033601811800264}
   m_Layer: 5
   m_Name: BaseButton
   m_TagString: Untagged
@@ -202,8 +202,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 6cbf273c77eba1a448f3c04ff4292030, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: c5c79f69909c16942b803f137f3ca0eb, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -256,7 +256,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &2743529946995833748
+--- !u!114 &1828033601811800264
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -265,13 +265,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 8911814760011315805}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0875ef424a214bae8a7e1da7bde0c40a, type: 3}
+  m_Script: {fileID: 11500000, guid: fe262bd10ba446508cce0b09cf6b4053, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animateOnStart: 1
-  startDelay: 0.5
-  animationDuration: 0.3
-  animationEase: 9
-  animationTarget: {fileID: 6076039999938920222}
-  startScale: {x: 0, y: 0, z: 0}
-  endScale: {x: 1, y: 1, z: 1}
+  animationDuration: 0.1
+  clickedScale: 0.9
+  animationEase: 1
