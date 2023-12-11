@@ -157,6 +157,7 @@ GameObject:
   - component: {fileID: 2267919084376367671}
   - component: {fileID: 5738470900365151543}
   - component: {fileID: 513825365264131899}
+  - component: {fileID: 8781296030184318040}
   m_Layer: 5
   m_Name: LoginBtn
   m_TagString: Untagged
@@ -266,6 +267,25 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &8781296030184318040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2621859741004244369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0875ef424a214bae8a7e1da7bde0c40a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationTarget: {fileID: 837099939352174802}
+  animateOnStart: 1
+  startDelay: 0.5
+  animationDuration: 0.3
+  animationEase: 9
+  startScale: {x: 0, y: 0, z: 0}
+  endScale: {x: 1, y: 1, z: 1}
 --- !u!1 &3168129846963893505
 GameObject:
   m_ObjectHideFlags: 0

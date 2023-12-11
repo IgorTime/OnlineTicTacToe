@@ -29,6 +29,7 @@ namespace TTT.Client.UIAnimations
         private Tweener uiAnimation;
 
         protected RectTransform AnimationTarget { get; private set; }
+        public bool IsPlaying => uiAnimation.IsPlaying();
 
         private async UniTaskVoid Awake()
         {
