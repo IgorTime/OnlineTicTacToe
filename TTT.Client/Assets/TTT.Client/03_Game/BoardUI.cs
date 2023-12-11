@@ -92,7 +92,6 @@ namespace TTT.Client.Game
             }
             else
             {
-                Debug.Log($"Cell {cellIndex} clicked");
                 gameManager.InputEnabled = false;
 
                 var msg = new NetMarkCellRequest
