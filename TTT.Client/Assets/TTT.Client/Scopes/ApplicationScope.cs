@@ -16,6 +16,13 @@ namespace TTT.Client.Scopes
         [SerializeField]
         private NetworkSettings networkSettings;
 
+        private static MessagePipeOptions RegisterMessagePipe(IContainerBuilder builder)
+        {
+            var options = builder.RegisterMessagePipe();
+            builder.RegisterBuildCallback(c => GlobalMessagePipe.SetProvider(c.AsServiceProvider()));
+            return options;
+        }
+
         protected override void Configure(IContainerBuilder builder)
         {
             builder.RegisterInstance(networkSettings);
@@ -35,13 +42,6 @@ namespace TTT.Client.Scopes
             });
         }
 
-        private static MessagePipeOptions RegisterMessagePipe(IContainerBuilder builder)
-        {
-            var options = builder.RegisterMessagePipe();
-            builder.RegisterBuildCallback(c => GlobalMessagePipe.SetProvider(c.AsServiceProvider()));
-            return options;
-        }
-
         private void RegisterMessages(IContainerBuilder builder, MessagePipeOptions options)
         {
             builder.RegisterMessageBroker<OnCellMarked>(options);
@@ -50,6 +50,7 @@ namespace TTT.Client.Scopes
             builder.RegisterMessageBroker<OnSurrender>(options);
             builder.RegisterMessageBroker<OnOpponentQuitGame>(options);
             builder.RegisterMessageBroker<OnServerStatusUpdated>(options);
+            builder.RegisterMessageBroker<OnAuthFailed>(options);
         }
     }
 }

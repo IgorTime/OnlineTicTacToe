@@ -1,9 +1,10 @@
-using System.Threading.Tasks;
+using System;
+using Cysharp.Threading.Tasks;
+using MessagePipe;
 using TMPro;
-using TTT.Client.PacketHandlers;
+using TTT.Client.LocalMessages;
 using TTT.Client.User;
 using TTT.Shared.Packets.ClientServer;
-using TTT.Shared.Packets.ServerClient;
 using UnityEngine;
 using UnityEngine.UI;
 using VContainer;
@@ -26,29 +27,33 @@ namespace TTT.Client.Login
 
         private INetworkClient networkClient;
         private IUserService userService;
+        private IDisposable unsubscribe;
 
         [Inject]
         public void Construct(
             INetworkClient networkClient,
-            IUserService userService)
+            IUserService userService,
+            ISubscriber<OnAuthFailed> onAuthFiled)
         {
-            Debug.Log("Construct");
             this.networkClient = networkClient;
             this.userService = userService;
+
+            var bag = DisposableBag.CreateBuilder();
+            onAuthFiled.Subscribe(OnAuthFail).AddTo(bag);
+            unsubscribe = bag.Build();
         }
 
         private void Start()
         {
             loginButton.onClick.AddListener(Login);
-            OnAuthFailHandler.OnAuthFail += OnAuthFail;
         }
 
         private void OnDestroy()
         {
-            OnAuthFailHandler.OnAuthFail -= OnAuthFail;
+            unsubscribe?.Dispose();
         }
 
-        private void OnAuthFail(NetOnAuthFail obj)
+        private void OnAuthFail(OnAuthFailed message)
         {
             loginButton.interactable = true;
             loginError.gameObject.SetActive(true);
@@ -69,7 +74,7 @@ namespace TTT.Client.Login
 
             while (!networkClient.IsConnected)
             {
-                await Task.Yield();
+                await UniTask.Yield();
             }
 
             var request = new NetAuthRequest
